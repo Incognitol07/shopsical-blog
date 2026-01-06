@@ -20,9 +20,9 @@ module.exports = {
 				cyan: '#79FFE1',
 			},
 			fontFamily: {
-				sans: ['"Poppins"', 'sans-serif'],
-				heading: ['"Sora"', 'sans-serif'],
-				sora: ['"Sora"', 'sans-serif'],
+				sans: ['var(--font-sora)', 'sans-serif'],
+				heading: ['var(--font-sora)', 'sans-serif'],
+				poppins: ['var(--font-poppins)', 'sans-serif'],
 			},
 			typography: () => ({
 				DEFAULT: {
