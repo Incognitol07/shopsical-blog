@@ -1,7 +1,15 @@
 import { ThemeProvider } from 'next-themes';
 import { AppProps } from 'next/app';
+import { Poppins, Sora } from 'next/font/google';
 import { useEffect } from 'react';
 import '../styles/index.css';
+
+const sora = Sora({ subsets: ['latin'], variable: '--font-sora', weight: ['600', '700', '800'] });
+const poppins = Poppins({
+	subsets: ['latin'],
+	variable: '--font-poppins',
+	weight: ['400', '500', '600'],
+});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	useEffect(() => {
@@ -13,8 +21,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 		};
 	}, []);
 	return (
-		<ThemeProvider attribute="class">
-			<Component {...pageProps} />
+		<ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+			<main className={`${sora.variable} ${poppins.variable} font-sans`}>
+				<Component {...pageProps} />
+			</main>
 		</ThemeProvider>
 	);
 }

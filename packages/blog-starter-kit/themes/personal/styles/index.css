@@ -2,47 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-.hashnode-content-style{
-    @apply prose break-words text-slate-950 first:prose-p:mt-0 prose-img:max-w-full prose-p:leading-snug prose-a:underline hover:prose-a:bg-primary-50 dark:hover:prose-a:text-primary-500 dark:hover:prose-a:bg-neutral-800 dark:text-neutral-50 prose-blockquote:leading-snug prose-a:leading-snug prose-figure:leading-snug prose-figcaption:leading-snug prose-pre:leading-snug prose-li:leading-snug prose-ul:leading-snug prose-ol:leading-snug prose-th:leading-snug prose-td:leading-snug lg:prose-xl dark:prose-invert dark:prose-pre:bg-neutral-900 first:prose-h1:mt-0 first:prose-h2:mt-0 first:prose-h3:mt-0 first:prose-h4:mt-0 first:prose-h5:mt-0;
+@layer base {
+	:root {
+		--background: 0 0% 7%; /* #121212 */
+		--foreground: 0 0% 92%; /* #EAEAEA */
+		--card: 222.2 84% 4.9%;
+		--card-foreground: 210 40% 98%;
+		--popover: 222.2 84% 4.9%;
+		--popover-foreground: 210 40% 98%;
+		--primary: 315 100% 60%; /* #FF33CC */
+		--primary-foreground: 210 40% 98%;
+		--secondary: 217.2 32.6% 17.5%;
+		--secondary-foreground: 210 40% 98%;
+		--muted: 217.2 32.6% 17.5%;
+		--muted-foreground: 215 20.2% 65.1%;
+		--accent: 217.2 32.6% 17.5%;
+		--accent-foreground: 210 40% 98%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 210 40% 98%;
+		--border: 217.2 32.6% 17.5%;
+		--input: 217.2 32.6% 17.5%;
+		--ring: 212.7 26.8% 83.9%;
+	}
 }
 
-/* Override to remove the backtick */
-.hashnode-content-style :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before, .hashnode-content-style :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after  {
-    content: none;
+@layer base {
+	* {
+		@apply border-white/10;
+	}
+	body {
+		@apply bg-background text-neutral-50 font-sans selection:bg-primary selection:text-white;
+	}
 }
 
-.prose code {
-    border-radius: 0.25rem;
-    font-weight: 400 !important;
-    padding: 0.25rem;
-    --tw-text-opacity: 1;
-    color: rgba(0, 0, 0, var(--tw-text-opacity));
-    font-size: 80%;
-    background: #f0efed;
-}
-  
-.dark .prose code {
-    --tw-bg-opacity: 1;
-    background-color: rgba(36, 41, 46, var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgba(238, 238, 238, var(--tw-text-opacity));
-}
-  
-.prose pre {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-}
-  
-.prose pre code {
-    background-color: transparent;
-    border-radius: 0px;
-    font-weight: 500 !important;
-    padding: 0px;
-    font-size: 100%;
-    color: #fafafa;
+.hashnode-content-style {
+	@apply prose break-words text-neutral-300
+	prose-headings:font-heading prose-headings:font-bold prose-headings:text-white
+	prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:text-pink-400
+	prose-strong:text-white prose-code:text-primary prose-code:bg-white/10 prose-code:rounded-md prose-code:px-1
+	prose-blockquote:border-l-primary prose-blockquote:text-neutral-400
+	lg:prose-xl;
 }
 
-.dark .prose pre code {
-    background-color: transparent;
-    color: #ddd;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	@apply bg-background;
+}
+::-webkit-scrollbar-thumb {
+	@apply bg-white/10 rounded-full hover:bg-primary/50 transition-colors;
 }

@@ -61,41 +61,37 @@ export const PersonalHeader = () => {
 	);
 
 	return (
-		<header className="grid grid-cols-2 items-center gap-5 ">
-			<div className="col-span-full md:col-span-1">
-				<div className="flex justify-between">
-					<h1>
-						<Link
-							className="flex flex-row items-center gap-2 text-lg font-bold leading-tight tracking-tight text-black dark:text-white"
-							href="/"
-							aria-label={`${publication.author.name}'s blog home page`}
-						>
-							{publication.author.profilePicture && (
-								<img
-									className="block h-8 w-8 rounded-full fill-current"
-									alt={publication.author.name}
-									src={resizeImage(publication.author.profilePicture, {
-										w: 400,
-										h: 400,
-										c: 'face',
-									})}
-								/>
-							)}
-							{publication.title}
-						</Link>
-					</h1>
-					<ToggleTheme className="md:hidden" />
+		<header className="sticky top-0 z-50 mb-10 w-full border-b border-white/10 bg-black/20 backdrop-blur-md">
+			<div className="mx-auto grid max-w-6xl grid-cols-2 items-center gap-5 px-5 py-4">
+				<div className="col-span-full md:col-span-1">
+					<div className="flex justify-between">
+						<h1>
+							<Link
+								className="flex flex-row items-center gap-2 text-xl font-bold font-heading uppercase tracking-tight text-white"
+								href="/"
+								aria-label={`${publication.author.name}'s blog home page`}
+							>
+								{publication.author.profilePicture && (
+									<img
+										className="block h-10 w-10 rounded-full border-2 border-primary/50 shadow-glow"
+										alt={publication.author.name}
+										src={resizeImage(publication.author.profilePicture, {
+											w: 400,
+											h: 400,
+											c: 'face',
+										})}
+									/>
+								)}
+								{publication.title}
+							</Link>
+						</h1>
+						<ToggleTheme className="md:hidden" />
+					</div>
 				</div>
-			</div>
-			<div className="col-span-full flex flex-row items-center justify-between gap-4 md:col-span-1 md:justify-end">
-				<nav>{navList}</nav>
-				<ToggleTheme className="hidden md:block" />
-				{/* <Button
-          label=""
-          type="outline"
-          className="!p-2"
-          icon={<NewsletterPlusSVG className="w-5 h-5 fill-current" />}
-        /> */}
+				<div className="col-span-full flex flex-row items-center justify-between gap-4 md:col-span-1 md:justify-end">
+					<nav>{navList}</nav>
+					<ToggleTheme className="hidden md:block" />
+				</div>
 			</div>
 		</header>
 	);
