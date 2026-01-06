@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import { resizeImage } from '@starter-kit/utils/image';
 import { ImageResponse } from '@vercel/og';
 import { type NextRequest } from 'next/server';
 import { DEFAULT_AVATAR } from '../../../utils/const';
+import Image from 'next/image';
 
 export const config = {
 	runtime: 'edge',
@@ -84,7 +84,7 @@ export default async function handler(req: NextRequest) {
 					<div tw="absolute -top-px -left-px -right-px -bottom-px rounded-xl border-2 border-black/5" />
 					<div tw="flex w-full flex-row items-center">
 						{/* if author image is not available, use the default author image (DEFAULT_AVATAR) from const */}
-						<img tw="mr-5 h-16 w-16 rounded-full" alt="name" src={photo} />
+						<Image tw="mr-5 h-16 w-16 rounded-full" alt="name" src={photo} />
 						<div tw="flex flex-col items-start">
 							{/* Author name, even if it's team */}
 							<p tw="m-0 text-2xl font-bold leading-tight">{author}</p>
