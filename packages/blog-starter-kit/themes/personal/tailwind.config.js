@@ -22,6 +22,7 @@ module.exports = {
 			fontFamily: {
 				sans: ['"Poppins"', 'sans-serif'],
 				heading: ['"Sora"', 'sans-serif'],
+				sora: ['"Sora"', 'sans-serif'],
 			},
 			typography: () => ({
 				DEFAULT: {
