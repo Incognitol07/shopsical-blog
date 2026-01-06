@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { PublicationNavbarItem } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
 import { ToggleTheme } from './toggle-theme';
+import Image from 'next/image';
 
 function hasUrl(
 	navbarItem: PublicationNavbarItem,
@@ -72,7 +73,7 @@ export const PersonalHeader = () => {
 								aria-label={`${publication.author.name}'s blog home page`}
 							>
 								{publication.author.profilePicture && (
-									<img
+									<Image
 										className="block h-10 w-10 rounded-full border-2 border-primary/50 shadow-glow"
 										alt={publication.author.name}
 										src={resizeImage(publication.author.profilePicture, {

@@ -3,6 +3,7 @@ import { resizeImage } from '@starter-kit/utils/image';
 
 import { DEFAULT_AVATAR } from '../utils/const/images';
 import { twMerge } from 'tailwind-merge';
+import Image from 'next/image';
 
 /**
  * Progressive Image Component which loads low resolution version image before loading original
@@ -44,12 +45,14 @@ class ProgressiveImage extends React.Component<{
     const resizedImage = resizeImage(src, resize);
 
     return (
-      <img
+      <Image
         data-sizes="auto"
         loading="lazy"
         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
         // eslint-disable-next-line no-return-assign
-        ref={(c) => (this.image = c || null)}
+        ref={(c) => {
+          this.image = c;
+        }}
         data-src={resizedImage}
         width={resize.w}
         height={resize.h}
