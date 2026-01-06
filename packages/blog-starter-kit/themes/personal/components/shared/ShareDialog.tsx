@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FacebookIcon, WhatsAppIcon, XIcon } from "@/components/Icons";
+import { FacebookIcon, WhatsAppIcon, XIcon } from "@/components/icons";
 import { toast } from "react-toastify";
 import { IconBrandTelegram } from "@tabler/icons-react";
 export interface ShareableContent {
