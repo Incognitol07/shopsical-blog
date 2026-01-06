@@ -62,7 +62,7 @@ export const PersonalHeader = () => {
 	);
 
 	return (
-		<header className="sticky top-0 z-50 mb-10 w-full border-b border-white/10 bg-black/20 backdrop-blur-md">
+		<header className="sticky top-0 z-50 mb-10 w-full border-b border-white/10 bg-white/10 backdrop-blur-sm">
 			<div className="mx-auto grid max-w-6xl grid-cols-2 items-center gap-5 px-5 py-4">
 				<div className="col-span-full md:col-span-1">
 					<div className="flex justify-between">
