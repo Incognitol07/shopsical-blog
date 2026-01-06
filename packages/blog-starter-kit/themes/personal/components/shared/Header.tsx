@@ -43,9 +43,9 @@ export default function Header() {
 
   // Define navigation links
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/support", label: "Support" },
+    { href: "https://shopsical.com/", label: "Home" },
+    { href: "https://shopsical.com/about", label: "About" },
+    { href: "https://shopsical.com/support", label: "Support" },
   ];
 
   // Filter out the current page from navigation

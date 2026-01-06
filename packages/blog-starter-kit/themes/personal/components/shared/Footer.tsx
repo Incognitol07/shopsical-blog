@@ -24,11 +24,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const pageLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/support", label: "Support" },
-    { href: "/legal", label: "Legal" },
-    { href: "/delete", label: "Delete Account" },
+    { href: "https://shopsical.com/", label: "Home" },
+    { href: "https://shopsical.com/about", label: "About" },
+    { href: "https://shopsical.com/support", label: "Support" },
+    { href: "https://shopsical.com/legal", label: "Legal" },
+    { href: "https://shopsical.com/delete", label: "Delete Account" },
   ];
 
   const socialLinks = [
