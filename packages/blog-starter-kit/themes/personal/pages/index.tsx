@@ -237,11 +237,9 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 												</p>
 
 												<div className="flex items-center justify-between mt-auto">
-													{/* <div className="flex items-center gap-2 text-sm text-white/50">
+													<div className="flex text-sm text-white/50">
 														<span>{new Date(post.publishedAt).toLocaleDateString()}</span>
-														<span>•</span>
-														<span>{post.readTimeInMinutes} min read</span>
-													</div> */}
+													</div>
 
 													<div className="flex items-center gap-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
 														<span className="text-sm font-medium">Read Article</span>
