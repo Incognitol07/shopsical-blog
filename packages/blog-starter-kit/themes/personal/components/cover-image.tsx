@@ -12,11 +12,11 @@ export const CoverImage = ({ title, src, slug, priority = false }: Props) => {
 	const postURL = `/${slug}`;
 
 	const image = (
-		<div className="relative pt-[52.5%]">
+		<div className="relative overflow-hidden rounded-2xl pt-[52.5%]">
 			<Image
 				src={src}
 				alt={`Cover Image for ${title}`}
-				className="w-full rounded-md border object-cover hover:opacity-90 dark:border-neutral-800"
+				className="w-full object-cover transition-transform duration-500 hover:scale-105 border border-white/10"
 				fill
 				unoptimized
 				priority={priority}
