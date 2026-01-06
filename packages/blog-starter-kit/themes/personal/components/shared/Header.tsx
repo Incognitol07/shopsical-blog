@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 const navVariants = {
@@ -24,7 +24,8 @@ const navVariants = {
 };
 
 export default function Header() {
-  const pathname = usePathname();
+  const router = useRouter();
+  const pathname = router.pathname;
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
