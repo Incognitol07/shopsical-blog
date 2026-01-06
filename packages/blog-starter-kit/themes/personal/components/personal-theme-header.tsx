@@ -1,4 +1,9 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import {
+	DropdownMenu,
+	DropdownMenuTrigger,
+	DropdownMenuContent,
+	DropdownMenuItem,
+} from './ui/dropdown-menu';
 import { resizeImage } from '@starter-kit/utils/image';
 import Link from 'next/link';
 import { PublicationNavbarItem } from '../generated/graphql';
@@ -31,31 +36,25 @@ export const PersonalHeader = () => {
 
 			{hiddenItems.length > 0 && (
 				<li>
-					<DropdownMenu.Root>
-						<DropdownMenu.Trigger asChild>
-							<button>More</button>
-						</DropdownMenu.Trigger>
-						<DropdownMenu.Portal>
-							<DropdownMenu.Content
-								className="flex flex-col items-stretch gap-1 rounded-lg border bg-white text-xs font-semibold uppercase tracking-tight text-neutral-600 shadow-xl dark:border-neutral-800 dark:bg-neutral-900  dark:text-neutral-300"
-								sideOffset={5}
-								align="end"
-							>
-								{hiddenItems.map((item) => (
-									<DropdownMenu.Item asChild key={item.url}>
-										<a
-											href={item.url}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="block w-full p-2 hover:underline"
-										>
-											{item.label}
-										</a>
-									</DropdownMenu.Item>
-								))}
-							</DropdownMenu.Content>
-						</DropdownMenu.Portal>
-					</DropdownMenu.Root>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<button className="transition-opacity hover:opacity-80 focus:outline-none">More</button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className="w-48" align="end">
+							{hiddenItems.map((item) => (
+								<DropdownMenuItem asChild key={item.url}>
+									<a
+										href={item.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="block cursor-pointer"
+									>
+										{item.label}
+									</a>
+								</DropdownMenuItem>
+							))}
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</li>
 			)}
 		</ul>

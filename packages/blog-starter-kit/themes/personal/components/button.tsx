@@ -1,6 +1,8 @@
+import { Button as UiButton } from './ui/button';
+
 type Props = {
 	label: string;
-	type?: string;
+	type?: 'primary' | 'outline' | 'outline-dark';
 	icon?: React.ReactNode;
 	className?: string;
 	secondaryIcon?: React.ReactNode;
@@ -13,7 +15,7 @@ type Props = {
 
 export const Button = ({
 	label,
-	type,
+	type = 'primary',
 	icon,
 	className,
 	secondaryIcon,
@@ -23,60 +25,57 @@ export const Button = ({
 	target,
 	onClick,
 }: Props) => {
-	let buttonClassName: string;
+	const mapTypeToVariant = (type: string): "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | null | undefined => {
+		switch (type) {
+			case 'primary':
+				return 'default';
+			case 'outline':
+				return 'outline';
+			case 'outline-dark':
+				return 'ghost'; // Mapping outline-dark to ghost for now, or outline with overriding class
+			default:
+				return 'default';
+		}
+	};
 
-	switch (type) {
-		case 'outline':
-			buttonClassName =
-				'text-neutral-300 bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white backdrop-blur-md';
-			break;
+	const variant = mapTypeToVariant(type);
+	
+	// Custom styling to match previous 'outline-dark' if ghost isn't sufficient, 
+	// but trying to stick to standard variants where possible.
+	// For 'outline-dark', the previous style was transparent with white border.
+	// 'outline' is border-input.
+	
+	const content = (
+		<div className="flex flex-row items-center gap-2">
+			{icon && <div className="shrink-0">{icon}</div>}
+			{label}
+			{secondaryIcon && <div className="shrink-0">{secondaryIcon}</div>}
+		</div>
+	);
 
-		case 'primary':
-			buttonClassName =
-				'text-white bg-primary hover:bg-pink-600 border border-transparent shadow-[0_0_10px_rgba(255,51,204,0.3)] hover:shadow-[0_0_20px_rgba(255,51,204,0.6)]';
-			break;
-
-		case 'outline-dark':
-			buttonClassName =
-				'text-white bg-transparent hover:bg-white/10 hover:text-white border border-white/20';
-			break;
-
-		default:
-			buttonClassName =
-				'text-white bg-primary hover:bg-pink-600 border border-transparent shadow-[0_0_10px_rgba(255,51,204,0.3)] hover:shadow-[0_0_20px_rgba(255,51,204,0.6)]';
-	}
-
-	if (as === 'a') {
+	if (as === 'a' || href) {
 		return (
-			<a
-				href={href}
-				rel={rel}
-				target={target}
-				className={`flex flex-row items-center justify-start gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95 md:px-6 md:py-3 md:text-base ${buttonClassName} ${
-					secondaryIcon ? `md:justify-between` : `md:justify-center`
-				}  ${className}`}
+			// @ts-ignore
+			<UiButton
+				variant={variant}
+				className={`${className} ${type === 'outline-dark' ? 'border-white/20 text-white hover:bg-white/10' : ''}`}
+				asChild
 			>
-				<div className="flex flex-row items-center gap-2">
-					{icon && <div className="shrink-0">{icon}</div>}
-					{label || null}
-				</div>
-				{secondaryIcon && <div className="shrink-0">{secondaryIcon}</div>}
-			</a>
+				<a href={href} rel={rel} target={target}>
+					{content}
+				</a>
+			</UiButton>
 		);
 	}
 
 	return (
-		<button
+		// @ts-ignore
+		<UiButton
+			variant={variant}
+			className={`${className} ${type === 'outline-dark' ? 'border-white/20 text-white hover:bg-white/10' : ''}`}
 			onClick={onClick}
-			className={`flex flex-row items-center justify-start gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95 md:px-6 md:py-3 md:text-base ${buttonClassName} ${
-				secondaryIcon ? `md:justify-between` : `md:justify-center`
-			}  ${className}`}
 		>
-			<div className="flex flex-row items-center gap-2">
-				{icon && <div className="shrink-0">{icon}</div>}
-				{label || null}
-			</div>
-			{secondaryIcon && <div className="shrink-0">{secondaryIcon}</div>}
-		</button>
+			{content}
+		</UiButton>
 	);
 };
