@@ -7,11 +7,14 @@ import { useEffect, useState } from 'react';
 import { Waypoint } from 'react-waypoint';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, FileText } from 'lucide-react';
+import { ArrowRight, FileText, Clock, MessageCircle, User } from 'lucide-react';
+import Image from 'next/image';
 import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
 import { FloatingElement } from '../components/ui/FloatingElement';
+import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
+import { Badge } from '../components/ui/badge';
 import {
 	MorePostsByPublicationDocument,
 	MorePostsByPublicationQuery,
@@ -199,9 +202,98 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 						</motion.div>
 					</section>
 
-					{/* Posts Grid Section */}
-					<section className="py-16 px-4 sm:px-6 lg:px-8">
-						<div className="max-w-6xl mx-auto">
+			{/* Featured Post Section */}
+			{posts.length > 0 && (
+				<section className="py-8 px-4 sm:px-6 lg:px-8">
+					<div className="max-w-6xl mx-auto">
+						<motion.div
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.6 }}
+						>
+							<Link href={`/${posts[0].slug}`} className="block group">
+								<div className="relative overflow-hidden rounded-3xl bg-black/20 backdrop-blur-md border border-white/10 hover:border-blue-400/30 transition-all duration-500">
+									{/* Cover Image */}
+									{posts[0].coverImage?.url && (
+										<div className="relative h-[400px] sm:h-[500px] overflow-hidden">
+											<Image
+												src={posts[0].coverImage.url}
+												alt={posts[0].title}
+												fill
+												className="object-cover group-hover:scale-105 transition-transform duration-700"
+												priority
+											/>
+											<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+										</div>
+									)}
+									
+									{/* Content Overlay */}
+									<div className={`${posts[0].coverImage?.url ? 'absolute bottom-0 left-0 right-0' : 'relative'} p-8 sm:p-12`}>
+										<div className="flex items-center gap-3 mb-4">
+											<Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-400/30 hover:bg-blue-500/30">
+												Featured Post
+											</Badge>
+											{posts[0].tags && posts[0].tags.length > 0 && (
+												<Badge variant="outline" className="border-white/20 text-white/80 hover:bg-white/10">
+													{posts[0].tags[0].name}
+												</Badge>
+											)}
+										</div>
+
+										<h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 group-hover:text-blue-200 transition-colors duration-300">
+											{posts[0].title}
+										</h2>
+
+										<p className="text-white/80 text-lg mb-6 line-clamp-2 max-w-3xl">
+											{posts[0].brief}
+										</p>
+
+										{/* Author and Meta */}
+										<div className="flex items-center gap-6 flex-wrap">
+											<div className="flex items-center gap-3">
+												<Avatar className="h-10 w-10 border-2 border-white/20">
+													<AvatarImage src={posts[0].author.profilePicture || ''} alt={posts[0].author.name} />
+													<AvatarFallback className="bg-blue-500/20 text-blue-300">
+														{posts[0].author.name.charAt(0)}
+													</AvatarFallback>
+												</Avatar>
+												<span className="text-white/90 font-medium">{posts[0].author.name}</span>
+											</div>
+
+											<div className="flex items-center gap-4 text-white/60 text-sm">
+												<div className="flex items-center gap-1.5">
+													<Clock className="w-4 h-4" />
+													<span>{posts[0].readTimeInMinutes} min read</span>
+												</div>
+												<div className="flex items-center gap-1.5">
+													<MessageCircle className="w-4 h-4" />
+													<span>{posts[0].comments.totalDocuments}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</Link>
+						</motion.div>
+					</div>
+				</section>
+			)}
+
+			{/* Posts Grid Section */}
+			<section className="py-16 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-6xl mx-auto">
+					{posts.length > 1 && (
+						<>
+							<motion.h2
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								className="text-2xl sm:text-3xl font-bold text-white mb-8"
+							>
+								More Stories
+							</motion.h2>
+
 							<motion.div
 								initial="hidden"
 								whileInView="visible"
@@ -209,7 +301,7 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 								variants={containerVariants}
 								className="grid grid-cols-1 md:grid-cols-2 gap-8"
 							>
-								{posts.map((post, index) => (
+								{posts.slice(1).map((post, index) => (
 									<motion.div
 										key={post.id}
 										variants={fadeInUpVariants}
@@ -217,33 +309,65 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 										className="group"
 									>
 										<Link href={`/${post.slug}`} className="block h-full">
-											<div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl p-8 h-full flex flex-col hover:bg-black/30 hover:border-blue-400/30 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-400/10">
-												<FloatingElement
-													amplitude={3}
-													duration={4 + (index % 3)}
-													delay={index * 0.2}
-												>
-													<div className="mb-6 p-4 bg-white/5 inline-block rounded-xl text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
-														<FileText className="w-8 h-8" />
+											<div className="bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden h-full flex flex-col hover:bg-black/30 hover:border-blue-400/30 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-400/10">
+												{/* Cover Image */}
+												{post.coverImage?.url && (
+													<div className="relative h-48 overflow-hidden">
+														<Image
+															src={post.coverImage.url}
+															alt={post.title}
+															fill
+															className="object-cover group-hover:scale-110 transition-transform duration-500"
+														/>
 													</div>
-												</FloatingElement>
+												)}
 
-												<h3 className="text-xl sm:text-2xl font-semibold mb-4 text-white group-hover:text-blue-200 transition-colors duration-300 line-clamp-2">
-													{post.title}
-												</h3>
+												<div className="p-6 flex flex-col flex-grow">
+													{/* Tags */}
+													{post.tags && post.tags.length > 0 && (
+														<div className="flex gap-2 mb-3 flex-wrap">
+															{post.tags.slice(0, 2).map((tag) => (
+																<Badge
+																	key={tag.id}
+																	variant="outline"
+																	className="border-white/20 text-white/70 text-xs hover:bg-white/10"
+																>
+																	{tag.name}
+																</Badge>
+															))}
+														</div>
+													)}
 
-												<p className="text-white/70 mb-6 leading-relaxed group-hover:text-white/80 transition-colors duration-300 line-clamp-3 flex-grow">
-													{post.brief}
-												</p>
+													<h3 className="text-xl sm:text-2xl font-semibold mb-3 text-white group-hover:text-blue-200 transition-colors duration-300 line-clamp-2">
+														{post.title}
+													</h3>
 
-												<div className="flex items-center justify-between mt-auto">
-													<div className="flex text-sm text-white/50">
-														<span>{new Date(post.publishedAt).toLocaleDateString()}</span>
-													</div>
+													<p className="text-white/70 mb-4 leading-relaxed group-hover:text-white/80 transition-colors duration-300 line-clamp-2 flex-grow">
+														{post.brief}
+													</p>
 
-													<div className="flex items-center gap-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
-														<span className="text-sm font-medium">Read Article</span>
-														<ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+													{/* Author and Meta */}
+													<div className="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
+														<div className="flex items-center gap-2">
+															<Avatar className="h-8 w-8 border border-white/20">
+																<AvatarImage src={post.author.profilePicture || ''} alt={post.author.name} />
+																<AvatarFallback className="bg-blue-500/20 text-blue-300 text-xs">
+																	{post.author.name.charAt(0)}
+																</AvatarFallback>
+															</Avatar>
+															<span className="text-white/80 text-sm">{post.author.name}</span>
+														</div>
+
+														<div className="flex items-center gap-3 text-white/50 text-xs">
+															<div className="flex items-center gap-1">
+																<Clock className="w-3.5 h-3.5" />
+																<span>{post.readTimeInMinutes}m</span>
+															</div>
+															<div className="flex items-center gap-1">
+																<MessageCircle className="w-3.5 h-3.5" />
+																<span>{post.comments.totalDocuments}</span>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -251,24 +375,26 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 									</motion.div>
 								))}
 							</motion.div>
+						</>
+					)}
 
-							{/* Load More Button */}
-							{!loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
-								<div className="mt-16 text-center">
-									<button
-										onClick={loadMore}
-										className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full transition-all duration-300 backdrop-blur-md border border-white/10"
-									>
-										<span>Load More Stories</span>
-										<ArrowRight className="w-4 h-4" />
-									</button>
-								</div>
-							)}
-							{loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
-								<Waypoint onEnter={loadMore} bottomOffset={'10%'} />
-							)}
+					{/* Load More Button */}
+					{!loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
+						<div className="mt-16 text-center">
+							<button
+								onClick={loadMore}
+								className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full transition-all duration-300 backdrop-blur-md border border-white/10"
+							>
+								<span>Load More Stories</span>
+								<ArrowRight className="w-4 h-4" />
+							</button>
 						</div>
-					</section>
+					)}
+					{loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
+						<Waypoint onEnter={loadMore} bottomOffset={'10%'} />
+					)}
+				</div>
+			</section>
 				</div>
 			</Layout>
 		</AppProvider>

@@ -12,6 +12,12 @@ fragment Post on Post {
 	publishedAt
 	slug
 	brief
+	tags {
+		id
+		name
+		slug
+	}
+	readTimeInMinutes
 	comments(first: 0) {
 		totalDocuments
 	}
