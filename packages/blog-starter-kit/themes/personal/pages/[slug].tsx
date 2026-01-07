@@ -155,7 +155,7 @@ const Post = ({ publication, post }: PostProps) => {
 				)}
 
 				<div className={`${coverImageSrc ? 'absolute bottom-0 left-0 right-0' : 'relative'} px-4 sm:px-6 lg:px-8 pb-12`}>
-					<Container className="mx-auto max-w-4xl">
+				<Container className="mx-auto max-w-screen-2xl">
 						<motion.div
 							initial={{ opacity: 0, y: 30 }}
 							animate={{ opacity: 1, y: 0 }}
