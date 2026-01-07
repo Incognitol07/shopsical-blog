@@ -23,7 +23,6 @@ import { MarkdownToHtml } from '../components/markdown-to-html';
 import { PersonalHeader } from '../components/personal-theme-header';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Badge } from '../components/ui/badge';
-import { ReadingProgress } from '../components/blog/ReadingProgress';
 import { TableOfContents } from '../components/blog/TableOfContents';
 import { AuthorBio } from '../components/blog/AuthorBio';
 import { ShareButtons } from '../components/blog/ShareButtons';
@@ -103,7 +102,6 @@ const Post = ({ publication, post }: PostProps) => {
 
 	return (
 		<>
-			<ReadingProgress />
 			<Head>
 				<title>{post.seo?.title || post.title}</title>
 				<link rel="canonical" href={post.url} />
