@@ -225,14 +225,6 @@ const Post = ({ publication, post }: PostProps) => {
 												<Clock className="w-4 h-4" />
 												<span>{post.readTimeInMinutes} min read</span>
 											</div>
-											<div className="flex items-center gap-1.5">
-												<Heart className="w-4 h-4" />
-												<span>{post.reactionCount}</span>
-											</div>
-											<div className="flex items-center gap-1.5">
-												<MessageCircle className="w-4 h-4" />
-												<span>{post.comments.totalDocuments}</span>
-											</div>
 										</div>
 
 										<div className="ml-auto">
@@ -295,14 +287,6 @@ const Post = ({ publication, post }: PostProps) => {
 								<div className="flex items-center gap-1.5">
 									<Clock className="w-4 h-4" />
 									<span>{post.readTimeInMinutes} min read</span>
-								</div>
-								<div className="flex items-center gap-1.5">
-									<Heart className="w-4 h-4" />
-									<span>{post.reactionCount}</span>
-								</div>
-								<div className="flex items-center gap-1.5">
-									<MessageCircle className="w-4 h-4" />
-									<span>{post.comments.totalDocuments}</span>
 								</div>
 							</div>
 
