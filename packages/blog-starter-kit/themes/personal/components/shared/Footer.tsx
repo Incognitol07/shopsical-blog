@@ -21,7 +21,6 @@ const fadeInUpVariants = {
 };
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
 
   const pageLinks = [
     { href: "https://shopsical.com/", label: "Home" },
@@ -146,7 +145,7 @@ export default function Footer() {
           {/* Bottom Section: Copyright */}
           <div className="pt-6 border-t border-white/10">
             <p className="text-white/40 text-xs sm:text-sm text-center">
-              © {currentYear} Shopsical. All rights reserved. Made with ❤️ for
+              © 2025 Shopsical. All rights reserved. Made with ❤️ for
               social shoppers everywhere.
             </p>
           </div>
