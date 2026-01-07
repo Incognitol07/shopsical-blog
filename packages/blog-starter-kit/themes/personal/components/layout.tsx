@@ -52,7 +52,7 @@ export const Layout = ({ children }: Props) => {
 				style={{ minHeight: "100vh" }}
 			>
 				<DarkVeil
-					hueShift={30}
+					hueShift={220}
 					speed={0.3}
 					noiseIntensity={0.02}
 					warpAmount={0.1}
