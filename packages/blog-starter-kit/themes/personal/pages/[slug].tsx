@@ -140,97 +140,97 @@ const Post = ({ publication, post }: PostProps) => {
 			</Head>
 
 			{/* Hero Section */}
-			<div className="relative">
-				{coverImageSrc && (
-					<div className="relative h-[500px] w-full">
-						<Image
-							src={coverImageSrc}
-							alt={post.title}
-							fill
-							className="object-cover"
-							priority
-						/>
-						<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-					</div>
-				)}
+		<div className="relative bg-black">
+			{coverImageSrc && (
+				<div className="relative h-[400px] w-full overflow-hidden">
+					<Image
+						src={coverImageSrc}
+						alt={post.title}
+						fill
+						className="object-cover"
+						priority
+					/>
+					<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+				</div>
+			)}
 
-				<div className={`${coverImageSrc ? 'absolute bottom-0 left-0 right-0' : 'relative'} px-4 sm:px-6 lg:px-8 pb-12`}>
-				<Container className="max-w-screen-2xl">
-						<motion.div
-							initial={{ opacity: 0, y: 30 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6 }}
-						>
-							{/* Tags */}
-							{post.tags && post.tags.length > 0 && (
-								<div className="flex gap-2 mb-4 flex-wrap">
-									{post.tags.slice(0, 3).map((tag) => (
-										<Link key={tag.id} href={`/tag/${tag.slug}`}>
-											<Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-400/30 hover:bg-blue-500/30">
-												{tag.name}
-											</Badge>
-										</Link>
-									))}
-								</div>
-							)}
+			<div className="px-4 sm:px-6 lg:px-8 py-12">
+				<Container className="max-w-4xl">
+					<motion.div
+						initial={{ opacity: 0, y: 30 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6 }}
+					>
+						{/* Tags */}
+						{post.tags && post.tags.length > 0 && (
+							<div className="flex gap-2 mb-4 flex-wrap">
+								{post.tags.slice(0, 3).map((tag) => (
+									<Link key={tag.id} href={`/tag/${tag.slug}`}>
+										<Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-400/30 hover:bg-blue-500/30">
+											{tag.name}
+										</Badge>
+									</Link>
+								))}
+							</div>
+						)}
 
-							{/* Title */}
-							<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-								{post.title}
-							</h1>
+						{/* Title */}
+						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+							{post.title}
+						</h1>
 
-							{/* Subtitle */}
-							{post.subtitle && (
-								<p className="text-xl text-white/80 mb-6 leading-relaxed">
-									{post.subtitle}
-								</p>
-							)}
+						{/* Subtitle */}
+						{post.subtitle && (
+							<p className="text-xl text-white/80 mb-6 leading-relaxed">
+								{post.subtitle}
+							</p>
+						)}
 
-							{/* Author and Meta */}
-							<div className="flex items-center gap-6 flex-wrap">
-								<div className="flex items-center gap-3">
-									<Avatar className="h-12 w-12 border-2 border-white/20">
-										<AvatarImage src={post.author.profilePicture || ''} alt={post.author.name} />
-										<AvatarFallback className="bg-blue-500/20 text-blue-300">
-											{post.author.name.charAt(0)}
-										</AvatarFallback>
-									</Avatar>
-									<div>
-										<div className="text-white font-medium">{post.author.name}</div>
-										<div className="text-white/60 text-sm">@{post.author.username}</div>
-									</div>
-								</div>
-
-								<div className="flex items-center gap-4 text-white/70 text-sm flex-wrap">
-									<div className="flex items-center gap-1.5">
-										<Calendar className="w-4 h-4" />
-										<DateFormatter dateString={post.publishedAt} />
-									</div>
-									<div className="flex items-center gap-1.5">
-										<Clock className="w-4 h-4" />
-										<span>{post.readTimeInMinutes} min read</span>
-									</div>
-									<div className="flex items-center gap-1.5">
-										<Heart className="w-4 h-4" />
-										<span>{post.reactionCount}</span>
-									</div>
-									<div className="flex items-center gap-1.5">
-										<MessageCircle className="w-4 h-4" />
-										<span>{post.comments.totalDocuments}</span>
-									</div>
-								</div>
-
-								<div className="ml-auto">
-									<ShareButtons url={post.url} title={post.title} />
+						{/* Author and Meta */}
+						<div className="flex items-center gap-6 flex-wrap">
+							<div className="flex items-center gap-3">
+								<Avatar className="h-12 w-12 border-2 border-white/20">
+									<AvatarImage src={post.author.profilePicture || ''} alt={post.author.name} />
+									<AvatarFallback className="bg-blue-500/20 text-blue-300">
+										{post.author.name.charAt(0)}
+									</AvatarFallback>
+								</Avatar>
+								<div>
+									<div className="text-white font-medium">{post.author.name}</div>
+									<div className="text-white/60 text-sm">@{post.author.username}</div>
 								</div>
 							</div>
-						</motion.div>
-					</Container>
-				</div>
-			</div>
 
-			{/* Content Section */}
-		<Container className="max-w-screen-2xl px-4 sm:px-6 lg:px-8 py-12">
+							<div className="flex items-center gap-4 text-white/70 text-sm flex-wrap">
+								<div className="flex items-center gap-1.5">
+									<Calendar className="w-4 h-4" />
+									<DateFormatter dateString={post.publishedAt} />
+								</div>
+								<div className="flex items-center gap-1.5">
+									<Clock className="w-4 h-4" />
+									<span>{post.readTimeInMinutes} min read</span>
+								</div>
+								<div className="flex items-center gap-1.5">
+									<Heart className="w-4 h-4" />
+									<span>{post.reactionCount}</span>
+								</div>
+								<div className="flex items-center gap-1.5">
+									<MessageCircle className="w-4 h-4" />
+									<span>{post.comments.totalDocuments}</span>
+								</div>
+							</div>
+
+							<div className="ml-auto">
+								<ShareButtons url={post.url} title={post.title} />
+							</div>
+						</div>
+					</motion.div>
+				</Container>
+			</div>
+		</div>
+
+		{/* Content Section */}
+		<Container className="max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
 			<div className={`grid grid-cols-1 gap-12 ${post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:grid-cols-12' : ''}`}>
 				{/* Main Content */}
 				<motion.article
