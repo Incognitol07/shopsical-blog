@@ -150,7 +150,7 @@ const Post = ({ publication, post }: PostProps) => {
 							className="object-cover"
 							priority
 						/>
-						<div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+						<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 					</div>
 				)}
 
