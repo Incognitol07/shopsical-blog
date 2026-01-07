@@ -230,7 +230,7 @@ const Post = ({ publication, post }: PostProps) => {
 			</div>
 
 			{/* Content Section */}
-		<Container className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+		<Container className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 py-12">
 			<div className={`grid grid-cols-1 gap-12 ${post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:grid-cols-12' : ''}`}>
 				{/* Main Content */}
 				<motion.article
