@@ -163,15 +163,6 @@ const Post = ({ publication, post }: PostProps) => {
 							/>
 							{/* Gradient overlay */}
 							<div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-							
-							{/* Zoom icon on hover */}
-							<div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
-								<div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-4">
-									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-										<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
-									</svg>
-								</div>
-							</div>
 
 							{/* Hero Content Overlay - positioned at bottom */}
 							<div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
