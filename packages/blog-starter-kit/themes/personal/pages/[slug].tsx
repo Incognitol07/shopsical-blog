@@ -138,7 +138,7 @@ const Post = ({ publication, post }: PostProps) => {
 			</Head>
 
 			{/* Hero Section */}
-		<div className="px-4 sm:px-6 lg:px-8 py-12">
+		<div className="px-4 sm:px-6 lg:px-8 py-8">
 			<Container className="max-w-4xl">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -163,7 +163,7 @@ const Post = ({ publication, post }: PostProps) => {
 					)}
 
 					{/* Hero Content Overlay */}
-					<div className={`${coverImageSrc ? 'absolute inset-0 flex flex-col justify-end' : 'relative bg-black/20 backdrop-blur-md border border-white/10'} p-8`}>
+					<div className={`${coverImageSrc ? 'absolute inset-0 flex flex-col justify-end' : 'relative bg-black/20 backdrop-blur-md border border-white/10'} p-6`}>
 						{/* Tags */}
 						{post.tags && post.tags.length > 0 && (
 							<div className="flex gap-2 mb-4 flex-wrap">
@@ -233,7 +233,7 @@ const Post = ({ publication, post }: PostProps) => {
 		</div>
 
 		{/* Content Section */}
-		<Container className="max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
+		<Container className="max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
 			<div className={`grid grid-cols-1 gap-12 ${post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:grid-cols-12' : ''}`}>
 				{/* Main Content */}
 				<motion.article
