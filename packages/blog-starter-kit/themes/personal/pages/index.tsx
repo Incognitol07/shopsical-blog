@@ -266,10 +266,6 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 													<Clock className="w-4 h-4" />
 													<span>{posts[0].readTimeInMinutes} min read</span>
 												</div>
-												<div className="flex items-center gap-1.5">
-													<MessageCircle className="w-4 h-4" />
-													<span>{posts[0].comments.totalDocuments}</span>
-												</div>
 											</div>
 										</div>
 									</div>
@@ -362,10 +358,6 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 															<div className="flex items-center gap-1">
 																<Clock className="w-3.5 h-3.5" />
 																<span>{post.readTimeInMinutes}m</span>
-															</div>
-															<div className="flex items-center gap-1">
-																<MessageCircle className="w-3.5 h-3.5" />
-																<span>{post.comments.totalDocuments}</span>
 															</div>
 														</div>
 													</div>
