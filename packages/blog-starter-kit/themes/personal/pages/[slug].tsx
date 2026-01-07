@@ -230,53 +230,53 @@ const Post = ({ publication, post }: PostProps) => {
 			</div>
 
 			{/* Content Section */}
-			<Container className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-				<div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-					{/* Main Content */}
-					<motion.article
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}
-						className="lg:col-span-8"
-					>
-						<div className="prose prose-invert prose-lg max-w-none">
-							<MarkdownToHtml contentMarkdown={post.content.markdown} />
-						</div>
+		<Container className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+			<div className={`grid grid-cols-1 gap-12 ${post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:grid-cols-12' : ''}`}>
+				{/* Main Content */}
+				<motion.article
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.2 }}
+					className={post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:col-span-8' : ''}
+				>
+					<div className="prose prose-invert prose-lg max-w-none">
+						<MarkdownToHtml contentMarkdown={post.content.markdown} />
+					</div>
 
-						{/* Tags Section */}
-						{(post.tags ?? []).length > 0 && (
-							<div className="mt-12 pt-8 border-t border-white/10">
-								<h3 className="text-lg font-semibold text-white mb-4">Tagged with</h3>
-								<div className="flex flex-wrap gap-2">
-									{post.tags!.map((tag) => (
-										<Link key={tag.id} href={`/tag/${tag.slug}`}>
-											<Badge variant="outline" className="border-white/20 text-white/80 hover:bg-white/10">
-												#{tag.slug}
-											</Badge>
-										</Link>
-									))}
-								</div>
+					{/* Tags Section */}
+					{(post.tags ?? []).length > 0 && (
+						<div className="mt-12 pt-8 border-t border-white/10">
+							<h3 className="text-lg font-semibold text-white mb-4">Tagged with</h3>
+							<div className="flex flex-wrap gap-2">
+								{post.tags!.map((tag) => (
+									<Link key={tag.id} href={`/tag/${tag.slug}`}>
+										<Badge variant="outline" className="border-white/20 text-white/80 hover:bg-white/10">
+											#{tag.slug}
+										</Badge>
+									</Link>
+								))}
 							</div>
-						)}
-
-						{/* Author Bio */}
-						<div className="mt-12">
-							<AuthorBio
-								name={post.author.name}
-								username={post.author.username}
-								profilePicture={post.author.profilePicture}
-							/>
 						</div>
-					</motion.article>
+					)}
 
-					{/* Sidebar */}
+					{/* Author Bio */}
+					<div className="mt-12">
+						<AuthorBio
+							name={post.author.name}
+							username={post.author.username}
+							profilePicture={post.author.profilePicture}
+						/>
+					</div>
+				</motion.article>
+
+				{/* Sidebar */}
+				{post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 && (
 					<aside className="lg:col-span-4">
-						{post.features.tableOfContents.isEnabled && (
-							<TableOfContents items={post.features.tableOfContents.items} />
-						)}
+						<TableOfContents items={post.features.tableOfContents.items} />
 					</aside>
-				</div>
-			</Container>
+				)}
+			</div>
+		</Container>
 		</>
 	);
 };
