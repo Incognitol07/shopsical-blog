@@ -23,6 +23,7 @@ import { MarkdownToHtml } from '../components/markdown-to-html';
 import { PersonalHeader } from '../components/personal-theme-header';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Badge } from '../components/ui/badge';
+import { Dialog, DialogContent } from '../components/ui/dialog';
 import { TableOfContents } from '../components/blog/TableOfContents';
 import { AuthorBio } from '../components/blog/AuthorBio';
 import { ShareButtons } from '../components/blog/ShareButtons';
@@ -56,6 +57,7 @@ const Post = ({ publication, post }: PostProps) => {
 		'.hljs{display:block;overflow-x:auto;padding:.5em;background:#23241f}.hljs,.hljs-subst,.hljs-tag{color:#f8f8f2}.hljs-emphasis,.hljs-strong{color:#a8a8a2}.hljs-bullet,.hljs-link,.hljs-literal,.hljs-number,.hljs-quote,.hljs-regexp{color:#ae81ff}.hljs-code,.hljs-section,.hljs-selector-class,.hljs-title{color:#a6e22e}.hljs-strong{font-weight:700}.hljs-emphasis{font-style:italic}.hljs-attr,.hljs-keyword,.hljs-name,.hljs-selector-tag{color:#f92672}.hljs-attribute,.hljs-symbol{color:#66d9ef}.hljs-class .hljs-title,.hljs-params{color:#f8f8f2}.hljs-addition,.hljs-built_in,.hljs-builtin-name,.hljs-selector-attr,.hljs-selector-id,.hljs-selector-pseudo,.hljs-string,.hljs-template-variable,.hljs-type,.hljs-variable{color:#e6db74}.hljs-comment,.hljs-deletion,.hljs-meta{color:#75715e}';
 	const [, setMobMount] = useState(false);
 	const [canLoadEmbeds, setCanLoadEmbeds] = useState(false);
+	const [imageDialogOpen, setImageDialogOpen] = useState(false);
 	useEmbeds({ enabled: canLoadEmbeds });
 	const tagsList = (post.tags ?? []).map((tag) => (
 		<li key={tag.id}>
@@ -147,20 +149,30 @@ const Post = ({ publication, post }: PostProps) => {
 					className="relative overflow-hidden rounded-3xl mb-8"
 				>
 					{/* Cover Image */}
-					{coverImageSrc && (
-						<>
-							<div className="relative h-[500px] w-full">
-								<Image
-									src={coverImageSrc}
-									alt={post.title}
-									fill
-									className="object-cover"
-									priority
-								/>
+				{coverImageSrc && (
+					<>
+						<div 
+							className="relative h-[500px] w-full cursor-pointer group"
+							onClick={() => setImageDialogOpen(true)}
+						>
+							<Image
+								src={coverImageSrc}
+								alt={post.title}
+								fill
+								className="object-cover transition-transform duration-300 group-hover:scale-105"
+								priority
+							/>
+							<div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
+								<div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full p-4">
+									<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+										<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/>
+									</svg>
+								</div>
 							</div>
-							<div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-						</>
-					)}
+						</div>
+						<div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 pointer-events-none" />
+					</>
+				)}
 
 					{/* Hero Content Overlay */}
 					<div className={`${coverImageSrc ? 'absolute inset-0 flex flex-col justify-end' : 'relative bg-black/20 backdrop-blur-md border border-white/10'} p-6`}>
@@ -280,7 +292,23 @@ const Post = ({ publication, post }: PostProps) => {
 				)}
 			</div>
 		</Container>
-		</>
+
+		{/* Image Lightbox Dialog */}
+		<Dialog open={imageDialogOpen} onOpenChange={setImageDialogOpen}>
+			<DialogContent className="max-w-7xl w-full p-0 bg-black/95 border-white/10">
+				{coverImageSrc && (
+					<div className="relative w-full h-[90vh]">
+						<Image
+							src={coverImageSrc}
+							alt={post.title}
+							fill
+							className="object-contain"
+						/>
+					</div>
+				)}
+			</DialogContent>
+		</Dialog>
+	</>
 	);
 };
 
