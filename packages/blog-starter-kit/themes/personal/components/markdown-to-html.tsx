@@ -12,7 +12,7 @@ const MarkdownContent = ({ contentMarkdown }: Props) => {
 
 	return (
 		<div
-			className="hashnode-content-style mx-auto w-full px-5 md:max-w-screen-md"
+			className="hashnode-content-style w-full"
 			dangerouslySetInnerHTML={{ __html: content }}
 		/>
 	);
