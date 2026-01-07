@@ -65,7 +65,7 @@ export default function Header() {
           className="bg-black/20 backdrop-blur-md border border-white/10 rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center justify-between shadow-2xl"
         >
           {/* Logo */}
-          <Link href="/">
+          <Link href="https://shopsical.com/">
             <motion.div
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
