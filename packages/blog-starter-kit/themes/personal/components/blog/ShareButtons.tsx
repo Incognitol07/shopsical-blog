@@ -108,7 +108,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 				
 				<DropdownMenuItem
 					onClick={copyLink}
-					className="text-slate-600 hover:bg-slate-50 hover:text-primary cursor-pointer focus:bg-slate-50 focus:text-primary py-2.5 font-medium"
+					className="text-slate-600 hover:bg-slate-50 hover:text-primary cursor-pointer focus:bg-slate-50 focus:text-primary py-2.5 font-medium font-sans"
 				>
 					{copied ? (
 						<>
