@@ -107,7 +107,7 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 											Loading...
 										</>
 									) : (
-										'Load More Stories'
+										'Load More'
 									)}
 								</Button>
 							)}

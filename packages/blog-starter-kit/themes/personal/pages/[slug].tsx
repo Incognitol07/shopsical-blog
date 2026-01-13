@@ -119,6 +119,25 @@ const Post = ({ publication, post }: PostProps) => {
 				<style dangerouslySetInnerHTML={{ __html: highlightJsMonokaiTheme }}></style>
 			</Head>
 
+			{/* Cover Image */}
+			{coverImageSrc && (
+				<Container className="max-w-5xl px-4 sm:px-6 lg:px-8 mb-12">
+					<div 
+						className="relative h-[250px] sm:h-[600px] w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
+						onClick={() => setImageDialogOpen(true)}
+					>
+						<Image
+							src={coverImageSrc}
+							alt={post.title}
+							fill
+							className="object-cover hover:scale-105 transition-transform duration-700"
+							priority
+						/>
+					</div>
+				</Container>
+			)}
+
+
 			{/* Article Header */}
 			<div className="pt-6 sm:pt-10 pb-8 px-4 sm:px-6 lg:px-8 bg-background">
 				<Container className="max-w-4xl">
@@ -183,24 +202,6 @@ const Post = ({ publication, post }: PostProps) => {
 					</div>
 				</Container>
 			</div>
-
-			{/* Cover Image */}
-			{coverImageSrc && (
-				<Container className="max-w-5xl px-4 sm:px-6 lg:px-8 mb-12">
-					<div 
-						className="relative h-[250px] sm:h-[600px] w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
-						onClick={() => setImageDialogOpen(true)}
-					>
-						<Image
-							src={coverImageSrc}
-							alt={post.title}
-							fill
-							className="object-cover hover:scale-105 transition-transform duration-700"
-							priority
-						/>
-					</div>
-				</Container>
-			)}
 
 			{/* Content Section */}
 			<Container className="max-w-4xl px-4 sm:px-6 lg:px-8 pb-16">
