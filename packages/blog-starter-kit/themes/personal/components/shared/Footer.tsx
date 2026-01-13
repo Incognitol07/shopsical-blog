@@ -12,7 +12,6 @@ export default function Footer() {
     { href: "https://shopsical.com/about", label: "About" },
     { href: "https://shopsical.com/support", label: "Support" },
     { href: "https://shopsical.com/legal", label: "Legal" },
-    { href: "https://shopsical.com/delete", label: "Delete Account" },
   ];
 
   const socialLinks = [
