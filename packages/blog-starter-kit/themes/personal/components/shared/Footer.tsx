@@ -129,7 +129,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-400 text-xs text-center md:text-left">
-            © {new Date().getFullYear()} Shopsical. All rights reserved.
+            © 2025 Shopsical. All rights reserved.
           </p>
            <p className="text-slate-400 text-xs flex items-center gap-1">
              Made with <span className="text-red-500 animate-pulse">❤️</span> for social shoppers
