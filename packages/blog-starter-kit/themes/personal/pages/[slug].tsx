@@ -228,13 +228,13 @@ const Post = ({ publication, post }: PostProps) => {
 						)}
 
 						{/* Author Bio */}
-						<div className="mt-12 p-8 bg-accent-1 rounded-2xl">
+						{/* <div className="mt-12 p-8 bg-accent-1 rounded-2xl">
 							<AuthorBio
 								name={post.author.name}
 								username={post.author.username}
 								profilePicture={post.author.profilePicture}
 							/>
-						</div>
+						</div> */}
 					</article>
 
 					{/* Sidebar */}
