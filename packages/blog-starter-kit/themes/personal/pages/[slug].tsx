@@ -120,7 +120,7 @@ const Post = ({ publication, post }: PostProps) => {
 			</Head>
 
 			{/* Article Header */}
-			<div className="pt-10 pb-8 px-4 sm:px-6 lg:px-8 bg-background">
+			<div className="pt-6 sm:pt-10 pb-8 px-4 sm:px-6 lg:px-8 bg-background">
 				<Container className="max-w-4xl">
 					<div className="space-y-6">
 						{/* Tags */}
@@ -176,7 +176,7 @@ const Post = ({ publication, post }: PostProps) => {
 								</div>
 							</div>
 
-							<div className="ml-auto hidden sm:block">
+							<div className="ml-auto w-full sm:w-auto mt-4 sm:mt-0">
 								<ShareButtons url={post.url} title={post.title} />
 							</div>
 						</div>
@@ -188,7 +188,7 @@ const Post = ({ publication, post }: PostProps) => {
 			{coverImageSrc && (
 				<Container className="max-w-5xl px-4 sm:px-6 lg:px-8 mb-12">
 					<div 
-						className="relative h-[400px] sm:h-[600px] w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
+						className="relative h-[250px] sm:h-[600px] w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
 						onClick={() => setImageDialogOpen(true)}
 					>
 						<Image

@@ -36,7 +36,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent md:hidden" />
           </div>
           
-          <div className="p-8 md:p-12 flex flex-col justify-center bg-card-bg">
+          <div className="p-6 md:p-12 flex flex-col justify-center bg-card-bg">
             <div className="flex items-center gap-3 mb-6">
                 <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border-none">
                     Featured
