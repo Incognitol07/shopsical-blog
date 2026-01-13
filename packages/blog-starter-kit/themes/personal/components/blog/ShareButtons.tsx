@@ -92,7 +92,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 					Share
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end" className="bg-white border-slate-200 shadow-lg w-56 font-sans">
+			<DropdownMenuContent align="end" className="bg-white border-slate-200 w-56 font-sans">
 				{shareOptions.map((option) => (
 					<DropdownMenuItem
 						key={option.name}
