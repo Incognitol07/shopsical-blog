@@ -101,7 +101,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
 
   // Standard Variant
   return (
-    <Link href={`/${post.slug}`} className={cn("group block bg-background rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300", className)}>
+    <Link href={`/${post.slug}`} className={cn("group block bg-background overflow-hidden hover:-translate-y-1 transition-transform duration-300", className)}>
         <div className="relative h-64 overflow-hidden rounded-2xl mb-4">
              {post.coverImage?.url ? (
                 <Image
