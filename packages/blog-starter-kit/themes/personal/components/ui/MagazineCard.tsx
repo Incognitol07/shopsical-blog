@@ -17,7 +17,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
   
   if (variant === 'hero') {
     return (
-      <Link href={`/${post.slug}`} className={cn("group block w-full overflow-hidden rounded-3xl bg-card-bg border border-card-border hover:shadow-xl hover:shadow-primary/5 transition-all duration-300", className)}>
+      <Link href={`/${post.slug}`} className={cn("group block w-full overflow-hidden rounded-3xl bg-background border border-card-border hover:shadow-xl hover:shadow-primary/5 transition-all duration-300", className)}>
         <div className="grid md:grid-cols-2 gap-0 h-full">
           <div className="relative h-[300px] md:h-full min-h-[400px] overflow-hidden">
             {post.coverImage?.url ? (
@@ -36,7 +36,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent md:hidden" />
           </div>
           
-          <div className="p-6 md:p-12 flex flex-col justify-center bg-card-bg">
+          <div className="p-6 md:p-12 flex flex-col justify-center bg-background">
             <div className="flex items-center gap-3 mb-6">
                 <Badge className="bg-primary/10 text-primary hover:bg-primary/20 border-none">
                     Featured
@@ -101,7 +101,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
 
   // Standard Variant
   return (
-    <Link href={`/${post.slug}`} className={cn("group block bg-card-bg rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300", className)}>
+    <Link href={`/${post.slug}`} className={cn("group block bg-background rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300", className)}>
         <div className="relative h-64 overflow-hidden rounded-2xl mb-4">
              {post.coverImage?.url ? (
                 <Image
