@@ -21,7 +21,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 		};
 	}, []);
 	return (
-		<ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+		<ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
 			<main className={`${sora.variable} ${poppins.variable} font-sans`}>
 				<Component {...pageProps} />
 			</main>
