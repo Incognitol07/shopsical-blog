@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { Share2, Twitter, Linkedin, Link as LinkIcon, Check } from 'lucide-react';
+import { Share2, Twitter, Linkedin, Link as LinkIcon, Check, Facebook, Mail } from 'lucide-react';
 import { Button } from '../ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
+	DropdownMenuSeparator,
 } from '../ui/dropdown-menu';
+import { WhatsAppIcon, FacebookIcon, XIcon } from '../icons'; // Assuming these exist as per ShareDialog
+import { IconBrandTelegram } from '@tabler/icons-react';
 
 interface ShareButtonsProps {
 	url: string;
@@ -16,21 +19,56 @@ interface ShareButtonsProps {
 export function ShareButtons({ url, title }: ShareButtonsProps) {
 	const [copied, setCopied] = useState(false);
 
-	const shareOnTwitter = () => {
-		window.open(
-			`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
-			'_blank',
-			'width=550,height=420'
-		);
-	};
-
-	const shareOnLinkedIn = () => {
-		window.open(
-			`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-			'_blank',
-			'width=550,height=420'
-		);
-	};
+	const shareOptions = [
+		{
+			name: 'Twitter / X',
+			icon: <XIcon className="w-4 h-4 mr-2" />,
+			action: () => window.open(
+				`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+				'_blank',
+				'width=550,height=420'
+			),
+		},
+		{
+			name: 'Facebook',
+			icon: <FacebookIcon className="w-4 h-4 mr-2" />,
+			action: () => window.open(
+				`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+				'_blank',
+				'width=550,height=420'
+			),
+		},
+		{
+			name: 'LinkedIn',
+			icon: <Linkedin className="w-4 h-4 mr-2" />,
+			action: () => window.open(
+				`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+				'_blank',
+				'width=550,height=420'
+			),
+		},
+		{
+			name: 'WhatsApp',
+			icon: <WhatsAppIcon className="w-4 h-4 mr-2" />,
+			action: () => window.open(
+				`https://wa.me/?text=${encodeURIComponent(`${title} \n\n ${url}`)}`,
+				'_blank'
+			),
+		},
+		{
+			name: 'Telegram',
+			icon: <IconBrandTelegram className="w-4 h-4 mr-2" />,
+			action: () => window.open(
+				`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
+				'_blank'
+			),
+		},
+		{
+			name: 'Email',
+			icon: <Mail className="w-4 h-4 mr-2" />,
+			action: () => window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${title}\n\n${url}`)}`,
+		},
+	];
 
 	const copyLink = async () => {
 		try {
@@ -48,34 +86,33 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 				<Button
 					variant="outline"
 					size="sm"
-					className="bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+					className="bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
 				>
 					<Share2 className="w-4 h-4 mr-2" />
 					Share
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end" className="bg-black/90 backdrop-blur-md border-white/10">
-				<DropdownMenuItem
-					onClick={shareOnTwitter}
-					className="text-white hover:bg-white/10 cursor-pointer"
-				>
-					<Twitter className="w-4 h-4 mr-2" />
-					Share on Twitter
-				</DropdownMenuItem>
-				<DropdownMenuItem
-					onClick={shareOnLinkedIn}
-					className="text-white hover:bg-white/10 cursor-pointer"
-				>
-					<Linkedin className="w-4 h-4 mr-2" />
-					Share on LinkedIn
-				</DropdownMenuItem>
+			<DropdownMenuContent align="end" className="bg-white border-slate-200 shadow-lg w-56">
+				{shareOptions.map((option) => (
+					<DropdownMenuItem
+						key={option.name}
+						onClick={option.action}
+						className="text-slate-600 hover:bg-slate-50 hover:text-primary cursor-pointer focus:bg-slate-50 focus:text-primary py-2.5"
+					>
+						{option.icon}
+						Share on {option.name}
+					</DropdownMenuItem>
+				))}
+				
+				<DropdownMenuSeparator className="bg-slate-100" />
+				
 				<DropdownMenuItem
 					onClick={copyLink}
-					className="text-white hover:bg-white/10 cursor-pointer"
+					className="text-slate-600 hover:bg-slate-50 hover:text-primary cursor-pointer focus:bg-slate-50 focus:text-primary py-2.5 font-medium"
 				>
 					{copied ? (
 						<>
-							<Check className="w-4 h-4 mr-2 text-green-400" />
+							<Check className="w-4 h-4 mr-2 text-green-500" />
 							Link copied!
 						</>
 					) : (
