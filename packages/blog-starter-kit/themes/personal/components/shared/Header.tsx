@@ -5,20 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { Button } from "../ui/button";
 
 const navVariants = {
   hidden: {
     y: -100,
     opacity: 0,
-    filter: "blur(10px)",
   },
   visible: {
     y: 0,
     opacity: 1,
-    filter: "blur(0px)",
     transition: {
-      duration: 1,
-      delay: 0.2,
+      duration: 0.6,
     },
   },
 };
@@ -27,17 +25,24 @@ export default function Header() {
   const router = useRouter();
   const pathname = router.pathname;
   const [isMobile, setIsMobile] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -56,65 +61,53 @@ export default function Header() {
       variants={navVariants}
       initial="hidden"
       animate="visible"
-      className="w-full z-[100] fixed top-2 sm:top-4 px-2 sm:px-0"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm py-3" : "bg-transparent py-5"
+      }`}
     >
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          whileHover={{ scale: isMobile ? 1 : 1.02 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="bg-black/20 backdrop-blur-md border border-white/10 rounded-full px-3 sm:px-6 py-2 sm:py-3 flex items-center justify-between shadow-2xl"
-        >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="https://shopsical.com/">
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-              className="flex gap-1 sm:gap-2 items-end cursor-pointer"
-            >
-              <motion.div
-                whileHover={{ rotate: isMobile ? 0 : 360 }}
-                transition={{ duration: 0.6 }}
-              >
+          <Link href="/" className="flex items-center gap-2 group">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src="/icon.png"
                   alt="Shopsical Logo"
-                  width={isMobile ? 32 : 40}
-                  height={isMobile ? 32 : 40}
-                  className="w-8 h-8 sm:w-10 sm:h-10"
+                  fill
+                  className="object-contain"
                 />
-              </motion.div>
-              <Image
-                src="/logo.png"
-                alt="Shopsical"
-                width={isMobile ? 120 : 140}
-                height={isMobile ? 32 : 40}
-              />
-            </motion.div>
+              </div>
+              <div className="relative w-24 h-6 sm:w-32 sm:h-8 hidden sm:block">
+                 <Image
+                  src="/logo.png" // Ensure this is a dark version if your previous one was white, or use CSS filter
+                  alt="Shopsical"
+                  fill
+                  className="object-contain filter invert brightness-0" // Force black logo if source is white
+                />
+              </div>
           </Link>
 
-          {/* Navigation Links - Only show links that are NOT the current page */}
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-            className="flex items-center gap-2 sm:gap-4"
-          >
-            {visibleLinks.map((link) => (
-              <motion.div
-                key={link.href}
-                whileHover={{ scale: isMobile ? 1 : 1.05 }}
-              >
+          {/* Navigation Links */}
+          <div className="flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-6">
+              {visibleLinks.map((link) => (
                 <Link
+                  key={link.href}
                   href={link.href}
-                  className="text-white/80 hover:text-white text-sm transition-colors duration-300"
+                  className="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
                 >
                   {link.label}
                 </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+              ))}
+            </div>
+            
+            <a href="https://shopsical.com/download" target="_blank" rel="noopener noreferrer">
+              <Button size="sm" className="rounded-full font-semibold px-6 shadow-none hover:shadow-md transition-shadow">
+                Get the App
+              </Button>
+            </a>
+          </div>
+        </div>
       </div>
     </motion.nav>
   );
