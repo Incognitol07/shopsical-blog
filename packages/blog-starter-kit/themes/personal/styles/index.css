@@ -4,23 +4,29 @@
 
 @layer base {
 	:root {
-		--background: 0 0% 98%; /* #FAFAFA */
-		--foreground: 222.2 84% 4.9%; /* #0F172A */
+		--background: 0 0% 98%;
+		/* #FAFAFA */
+		--foreground: 222.2 84% 4.9%;
+		/* #0F172A */
 		--card: 0 0% 100%;
 		--card-foreground: 222.2 84% 4.9%;
 		--popover: 0 0% 100%;
 		--popover-foreground: 222.2 84% 4.9%;
-		--primary: 217 100% 50%; /* #0066FF */
+		--primary: 217 100% 50%;
+		/* #0066FF */
 		--primary-foreground: 210 40% 98%;
-		--secondary: 48 100% 50%; /* #FFD700 */
+		--secondary: 48 100% 50%;
+		/* #FFD700 */
 		--secondary-foreground: 222.2 47.4% 11.2%;
 		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%; /* #64748B */
+		--muted-foreground: 215.4 16.3% 46.9%;
+		/* #64748B */
 		--accent: 210 40% 96.1%;
 		--accent-foreground: 222.2 47.4% 11.2%;
 		--destructive: 0 84.2% 60.2%;
 		--destructive-foreground: 210 40% 98%;
-		--border: 214.3 31.8% 91.4%; /* #E2E8F0 */
+		--border: 214.3 31.8% 91.4%;
+		/* #E2E8F0 */
 		--input: 214.3 31.8% 91.4%;
 		--ring: 222.2 84% 4.9%;
 		--radius: 0.5rem;
@@ -31,27 +37,25 @@
 	* {
 		@apply border-slate-200;
 	}
+
 	body {
 		@apply bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary;
 	}
 }
 
 .hashnode-content-style {
-	@apply prose break-words text-foreground
-	prose-headings:font-heading prose-headings:font-bold prose-headings:text-foreground
-	prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary-dark
-	prose-strong:text-foreground prose-code:text-primary prose-code:bg-slate-100 prose-code:rounded-md prose-code:px-1
-	prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-blockquote:bg-slate-50 prose-blockquote:py-1 prose-blockquote:px-4
-	lg:prose-xl;
+	@apply prose break-words text-foreground prose-headings:font-heading prose-headings:font-bold prose-headings:text-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary-dark prose-strong:text-foreground prose-code:text-primary prose-code:bg-slate-100 prose-code:rounded-md prose-code:px-1 prose-blockquote:border-l-primary prose-blockquote:text-muted prose-blockquote:bg-slate-50 prose-blockquote:py-1 prose-blockquote:px-4 lg:prose-xl;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
 	width: 8px;
 }
+
 ::-webkit-scrollbar-track {
 	@apply bg-background;
 }
+
 ::-webkit-scrollbar-thumb {
 	@apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
 }
