@@ -82,7 +82,7 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 				<Container className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
 					<div className="py-10">
 						<SectionHeader 
-							title="New & Noteworthy" 
+							title="The Shopsical blog" 
 							description="Latest updates, stories, and guides from the Shopsical team." 
 						/>
 						
