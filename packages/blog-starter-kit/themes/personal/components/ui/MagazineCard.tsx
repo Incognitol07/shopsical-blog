@@ -70,7 +70,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
 
   if (variant === 'compact') {
     return (
-        <Link href={`/${post.slug}`} className={cn("group flex gap-4 items-start p-4 rounded-xl hover:bg-accent-1 transition-colors", className)}>
+        <Link href={`/${post.slug}`} className={cn("group flex gap-4 items-start rounded-xl hover:bg-accent-1 transition-colors", className)}>
              <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 rounded-lg overflow-hidden bg-accent-1">
                  {post.coverImage?.url ? (
                     <Image
@@ -115,7 +115,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
              )}
         </div>
         
-        <div className="space-y-3 p-4">
+        <div className="space-y-3">
             <div className="flex items-center gap-3 text-xs font-semibold tracking-wider uppercase text-muted-foreground">
                 <span className="text-primary">{post.tags?.[0]?.name || 'Article'}</span>
                 <span>•</span>
