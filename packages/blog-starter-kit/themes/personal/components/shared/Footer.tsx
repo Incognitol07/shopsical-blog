@@ -45,7 +45,7 @@ export default function Footer() {
                     src="/logo.png"
                     alt="Shopsical"
                     fill
-                    className="object-contain filter invert brightness-0"
+                    className="object-contain"
                   />
                 </div>
             </Link>
