@@ -21,12 +21,15 @@ const navVariants = {
   },
 };
 
+import { DownloadAppModal } from "./DownloadAppModal";
+
 export default function Header() {
   const router = useRouter();
   const pathname = router.pathname;
   const [isMobile, setIsMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -105,11 +108,13 @@ export default function Header() {
               ))}
             </div>
             
-            <a href="https://shopsical.com/download" target="_blank" rel="noopener noreferrer">
-              <Button size="sm" className="rounded-full font-semibold px-6 shadow-none hover:shadow-md transition-shadow text-white">
-                Get the App
-              </Button>
-            </a>
+            <Button 
+              size="sm" 
+              className="rounded-full font-semibold px-6 shadow-none hover:shadow-md transition-shadow text-white"
+              onClick={() => setIsDownloadModalOpen(true)}
+            >
+              Get the App
+            </Button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -149,15 +154,24 @@ export default function Header() {
                 </Link>
               ))}
               <div className="mt-4">
-                 <a href="https://shopsical.com/download" target="_blank" rel="noopener noreferrer" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full rounded-full font-semibold py-6 text-lg shadow-none text-white">
+                 <Button 
+                   className="w-full rounded-full font-semibold py-6 text-lg shadow-none text-white"
+                   onClick={() => {
+                     setIsMenuOpen(false);
+                     setIsDownloadModalOpen(true);
+                   }}
+                 >
                     Get the App
                   </Button>
-                </a>
               </div>
           </div>
         </motion.div>
       )}
+
+      <DownloadAppModal 
+        open={isDownloadModalOpen} 
+        onOpenChange={setIsDownloadModalOpen} 
+      />
     </motion.nav>
   );
 }
