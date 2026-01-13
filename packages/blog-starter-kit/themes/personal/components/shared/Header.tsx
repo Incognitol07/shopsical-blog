@@ -82,7 +82,7 @@ export default function Header() {
                   src="/logo.png" // Ensure this is a dark version if your previous one was white, or use CSS filter
                   alt="Shopsical"
                   fill
-                  className="object-contain filter invert brightness-0" // Force black logo if source is white
+                  className="object-contain" // Force black logo if source is white
                 />
               </div>
           </Link>

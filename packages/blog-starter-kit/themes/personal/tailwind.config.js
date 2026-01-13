@@ -36,24 +36,34 @@ module.exports = {
 			typography: () => ({
 				DEFAULT: {
 					css: {
-						'--tw-prose-body': '#EAEAEA',
-						'--tw-prose-headings': '#FFFFFF',
-						'--tw-prose-links': '#FF33CC',
+						'--tw-prose-body': '#334155', // Slate-700
+						'--tw-prose-headings': '#0F172A', // Slate-900
+						'--tw-prose-links': '#0066FF', // Primary Blue
+						'--tw-prose-bold': '#0F172A',
+						'--tw-prose-counters': '#64748B',
+						'--tw-prose-bullets': '#64748B',
+						'--tw-prose-hr': '#E2E8F0',
+						'--tw-prose-quotes': '#0F172A',
+						'--tw-prose-quote-borders': '#E2E8F0',
+						'--tw-prose-captions': '#64748B',
+						'--tw-prose-code': '#0F172A',
+						'--tw-prose-pre-code': '#E2E8F0',
+						'--tw-prose-pre-bg': '#1E293B',
 						'div[data-node-type="callout"]': {
 							display: 'flex',
 							'justify-content': 'flex-start',
 							'align-items': 'flex-start',
-							'background-color': '#1E1E1E',
-							border: '1px solid #333',
+							'background-color': '#F1F5F9', // Light Slate Bg
+							border: '1px solid #E2E8F0',
 							padding: ' 1rem 1.5rem',
 							gap: '0.5rem',
 							'border-radius': '0.5rem',
 							margin: '1rem 0',
 							'word-break': 'break-word',
-							color: '#EAEAEA',
+							color: '#334155',
 						},
 						'div[data-node-type="callout-emoji"]': {
-							background: '#333',
+							background: '#E2E8F0',
 							'border-radius': '0.5rem',
 							minWidth: '1.75rem',
 							width: '1.75rem',
