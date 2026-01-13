@@ -115,7 +115,7 @@ export const MagazineCard = ({ post, variant = 'standard', className }: Magazine
              )}
         </div>
         
-        <div className="space-y-3">
+        <div className="space-y-3 p-4">
             <div className="flex items-center gap-3 text-xs font-semibold tracking-wider uppercase text-muted-foreground">
                 <span className="text-primary">{post.tags?.[0]?.name || 'Article'}</span>
                 <span>•</span>
