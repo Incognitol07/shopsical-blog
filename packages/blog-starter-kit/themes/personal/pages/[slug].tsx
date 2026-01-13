@@ -207,7 +207,7 @@ const Post = ({ publication, post }: PostProps) => {
 				<div className={`grid grid-cols-1 gap-12 ${post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:grid-cols-12' : ''}`}>
 					{/* Main Content */}
 					<article className={post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:col-span-8' : 'mx-auto max-w-4xl'}>
-						<div className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary-dark prose-img:rounded-xl">
+						<div className="prose max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary-dark prose-img:rounded-xl">
 							<MarkdownToHtml contentMarkdown={post.content.markdown} />
 						</div>
 
