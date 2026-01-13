@@ -86,18 +86,18 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 				<Button
 					variant="outline"
 					size="sm"
-					className="bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors"
+					className="bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-primary transition-colors font-sans"
 				>
 					<Share2 className="w-4 h-4 mr-2" />
 					Share
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end" className="bg-white border-slate-200 shadow-lg w-56">
+			<DropdownMenuContent align="end" className="bg-white border-slate-200 shadow-lg w-56 font-sans">
 				{shareOptions.map((option) => (
 					<DropdownMenuItem
 						key={option.name}
 						onClick={option.action}
-						className="text-slate-600 hover:bg-slate-50 hover:text-primary cursor-pointer focus:bg-slate-50 focus:text-primary py-2.5"
+						className="text-slate-600 hover:bg-slate-50 hover:text-primary cursor-pointer focus:bg-slate-50 focus:text-primary py-2.5 font-sans"
 					>
 						{option.icon}
 						Share on {option.name}
