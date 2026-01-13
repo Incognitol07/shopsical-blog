@@ -12,16 +12,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Clock, MessageCircle, Heart, Calendar } from 'lucide-react';
+import { Clock, Calendar } from 'lucide-react';
 import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
-import { CoverImage } from '../components/cover-image';
 import { DateFormatter } from '../components/date-formatter';
-import { Footer } from '../components/footer';
 import { Layout } from '../components/layout';
 import { MarkdownToHtml } from '../components/markdown-to-html';
-import { PersonalHeader } from '../components/personal-theme-header';
 import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent } from '../components/ui/dialog';
@@ -60,16 +56,6 @@ const Post = ({ publication, post }: PostProps) => {
 	const [canLoadEmbeds, setCanLoadEmbeds] = useState(false);
 	const [imageDialogOpen, setImageDialogOpen] = useState(false);
 	useEmbeds({ enabled: canLoadEmbeds });
-	const tagsList = (post.tags ?? []).map((tag) => (
-		<li key={tag.id}>
-			<Link
-				href={`/tag/${tag.slug}`}
-				className="block rounded-full border px-2 py-1 font-medium hover:bg-slate-50 dark:border-neutral-800 dark:hover:bg-neutral-800 md:px-4"
-			>
-				#{tag.slug}
-			</Link>
-		</li>
-	));
 
 	if (post.hasLatexInPost) {
 		setTimeout(() => {
@@ -86,8 +72,6 @@ const Post = ({ publication, post }: PostProps) => {
 			return;
 		}
 
-		// TODO:
-		// More of an alert, did this below to wrap async funcs inside useEffect
 		(async () => {
 			await loadIframeResizer();
 			triggerCustomWidgetEmbed(post.publication?.id.toString());
@@ -109,39 +93,23 @@ const Post = ({ publication, post }: PostProps) => {
 				<title>{post.seo?.title || `${post.title} | ${SEO_CONFIG.site.name}`}</title>
 				<link rel="canonical" href={post.url} />
 				<meta name="description" content={post.seo?.description || post.subtitle || post.brief} />
-				
-				{/* Article Meta Tags */}
 				<meta name="author" content={post.author?.name} />
 				<meta name="article:published_time" content={post.publishedAt} />
 				{post.updatedAt && <meta name="article:modified_time" content={post.updatedAt} />}
 				<meta name="keywords" content={generateArticleKeywords(post.tags?.map((tag: any) => tag.name) || [])} />
 				
-				{/* Open Graph / Facebook */}
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content={post.url} />
 				<meta property="og:site_name" content={SEO_CONFIG.openGraph.siteName} />
 				<meta property="og:title" content={post.seo?.title || post.title} />
 				<meta property="og:description" content={post.seo?.description || post.subtitle || post.brief} />
 				<meta property="og:image" content={post.ogMetaData?.image || post.coverImage?.url || `${SEO_CONFIG.site.baseUrl}${SEO_CONFIG.assets.ogImageDefault}`} />
-				<meta property="og:image:width" content={SEO_CONFIG.openGraph.imageWidth.toString()} />
-				<meta property="og:image:height" content={SEO_CONFIG.openGraph.imageHeight.toString()} />
-				<meta property="og:locale" content={SEO_CONFIG.openGraph.locale} />
-				<meta property="article:published_time" content={post.publishedAt} />
-				{post.updatedAt && <meta property="article:modified_time" content={post.updatedAt} />}
-				<meta property="article:author" content={post.author?.name} />
 				
-				{/* Twitter */}
 				<meta name="twitter:card" content={SEO_CONFIG.twitter.card} />
-				<meta name="twitter:url" content={post.url} />
-				<meta name="twitter:site" content={SEO_CONFIG.twitter.site} />
-				<meta name="twitter:creator" content={SEO_CONFIG.twitter.creator} />
 				<meta name="twitter:title" content={post.seo?.title || post.title} />
 				<meta name="twitter:description" content={post.seo?.description || post.subtitle || post.brief} />
 				<meta name="twitter:image" content={post.ogMetaData?.image || post.coverImage?.url || `${SEO_CONFIG.site.baseUrl}${SEO_CONFIG.assets.ogImageDefault}`} />
 				
-				{/* Additional Meta Tags */}
-				<meta name="theme-color" content={SEO_CONFIG.meta.themeColor} />
-				<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
@@ -151,103 +119,16 @@ const Post = ({ publication, post }: PostProps) => {
 				<style dangerouslySetInnerHTML={{ __html: highlightJsMonokaiTheme }}></style>
 			</Head>
 
-			{/* Hero Section */}
-		<div className="px-4 sm:px-6 lg:px-8 py-8">
-			<Container className="max-w-4xl">
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6 }}
-					className="relative overflow-hidden rounded-3xl mb-8"
-				>
-					{/* Cover Image - Clickable */}
-					{coverImageSrc && (
-						<div 
-							className="relative h-[500px] w-full cursor-pointer group"
-							onClick={() => setImageDialogOpen(true)}
-						>
-							<Image
-								src={coverImageSrc}
-								alt={post.title}
-								fill
-								className="object-cover transition-transform duration-300 group-hover:scale-105"
-								priority
-							/>
-							{/* Gradient overlay */}
-							<div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-
-							{/* Hero Content Overlay - positioned at bottom */}
-							<div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
-								<div className="pointer-events-auto">
-									{/* Tags */}
-									{post.tags && post.tags.length > 0 && (
-										<div className="flex gap-2 mb-4 flex-wrap">
-											{post.tags.slice(0, 3).map((tag) => (
-												<Link key={tag.id} href={`/tag/${tag.slug}`}>
-													<Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-400/30 hover:bg-blue-500/30 backdrop-blur-sm">
-														{tag.name}
-													</Badge>
-												</Link>
-											))}
-										</div>
-									)}
-
-									{/* Title */}
-									<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-										{post.title}
-									</h1>
-
-									{/* Subtitle */}
-									{post.subtitle && (
-										<p className="text-xl text-white/90 mb-6 leading-relaxed">
-											{post.subtitle}
-										</p>
-									)}
-
-									{/* Author and Meta */}
-									<div className="flex items-center gap-6 flex-wrap pt-6 border-t border-white/20">
-										<div className="flex items-center gap-3">
-											<Avatar className="h-12 w-12 border-2 border-white/30">
-												<AvatarImage src={post.author.profilePicture || ''} alt={post.author.name} />
-												<AvatarFallback className="bg-blue-500/20 text-blue-300">
-													{post.author.name.charAt(0)}
-												</AvatarFallback>
-											</Avatar>
-											<div>
-												<div className="text-white font-medium">{post.author.name}</div>
-												<div className="text-white/70 text-sm">@{post.author.username}</div>
-											</div>
-										</div>
-
-										<div className="flex items-center gap-4 text-white/80 text-sm flex-wrap">
-											<div className="flex items-center gap-1.5">
-												<Calendar className="w-4 h-4" />
-												<DateFormatter dateString={post.publishedAt} />
-											</div>
-											<div className="flex items-center gap-1.5">
-												<Clock className="w-4 h-4" />
-												<span>{post.readTimeInMinutes} min read</span>
-											</div>
-										</div>
-
-										<div className="ml-auto">
-											<ShareButtons url={post.url} title={post.title} />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					)}
-
-					{/* Fallback for no cover image */}
-					{!coverImageSrc && (
-						<div className="relative bg-black/20 backdrop-blur-md border border-white/10 p-6">
+			{/* Article Header */}
+			<div className="pt-10 pb-8 px-4 sm:px-6 lg:px-8 bg-background">
+				<Container className="max-w-4xl">
+					<div className="space-y-6">
 						{/* Tags */}
 						{post.tags && post.tags.length > 0 && (
-							<div className="flex gap-2 mb-4 flex-wrap">
+							<div className="flex gap-2 flex-wrap">
 								{post.tags.slice(0, 3).map((tag) => (
 									<Link key={tag.id} href={`/tag/${tag.slug}`}>
-										<Badge variant="secondary" className="bg-blue-500/20 text-blue-300 border-blue-400/30 hover:bg-blue-500/30 backdrop-blur-sm">
+										<Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20 border-none rounded-full px-3 py-1 uppercase tracking-wider text-xs font-bold">
 											{tag.name}
 										</Badge>
 									</Link>
@@ -256,118 +137,134 @@ const Post = ({ publication, post }: PostProps) => {
 						)}
 
 						{/* Title */}
-						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight tracking-tight">
 							{post.title}
 						</h1>
 
 						{/* Subtitle */}
 						{post.subtitle && (
-							<p className="text-xl text-white/90 mb-6 leading-relaxed">
+							<p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
 								{post.subtitle}
 							</p>
 						)}
 
 						{/* Author and Meta */}
-						<div className="flex items-center gap-6 flex-wrap pt-6 border-t border-white/20">
+						<div className="flex items-center gap-6 py-6 border-y border-border">
 							<div className="flex items-center gap-3">
-								<Avatar className="h-12 w-12 border-2 border-white/30">
+								<Avatar className="h-12 w-12 border border-border">
 									<AvatarImage src={post.author.profilePicture || ''} alt={post.author.name} />
-									<AvatarFallback className="bg-blue-500/20 text-blue-300">
+									<AvatarFallback className="bg-primary/10 text-primary font-bold">
 										{post.author.name.charAt(0)}
 									</AvatarFallback>
 								</Avatar>
 								<div>
-									<div className="text-white font-medium">{post.author.name}</div>
-									<div className="text-white/70 text-sm">@{post.author.username}</div>
+									<div className="text-foreground font-bold">{post.author.name}</div>
+									<div className="text-muted-foreground text-sm">@{post.author.username}</div>
 								</div>
 							</div>
 
-							<div className="flex items-center gap-4 text-white/80 text-sm flex-wrap">
-								<div className="flex items-center gap-1.5">
-									<Calendar className="w-4 h-4" />
+							<div className="h-8 w-px bg-border hidden sm:block"></div>
+
+							<div className="flex items-center gap-6 text-muted-foreground text-sm font-medium">
+								<div className="flex items-center gap-2">
+									<Calendar className="w-4 h-4 text-primary" />
 									<DateFormatter dateString={post.publishedAt} />
 								</div>
-								<div className="flex items-center gap-1.5">
-									<Clock className="w-4 h-4" />
+								<div className="flex items-center gap-2">
+									<Clock className="w-4 h-4 text-primary" />
 									<span>{post.readTimeInMinutes} min read</span>
 								</div>
 							</div>
 
-							<div className="ml-auto">
+							<div className="ml-auto hidden sm:block">
 								<ShareButtons url={post.url} title={post.title} />
 							</div>
 						</div>
 					</div>
-				)}
-				</motion.div>
-			</Container>
-		</div>
-
-		{/* Content Section */}
-		<Container className="max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
-			<div className={`grid grid-cols-1 gap-12 ${post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:grid-cols-12' : ''}`}>
-				{/* Main Content */}
-				<motion.article
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.6, delay: 0.2 }}
-					className={post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:col-span-8' : 'mx-auto max-w-4xl'}
-				>
-					<div className="prose prose-invert prose-lg max-w-none">
-						<MarkdownToHtml contentMarkdown={post.content.markdown} />
-					</div>
-
-					{/* Tags Section */}
-					{(post.tags ?? []).length > 0 && (
-						<div className="mt-12 pt-8 border-t border-white/10">
-							<h3 className="text-lg font-semibold text-white mb-4">Tagged with</h3>
-							<div className="flex flex-wrap gap-2">
-								{post.tags!.map((tag) => (
-									<Link key={tag.id} href={`/tag/${tag.slug}`}>
-										<Badge variant="outline" className="border-white/20 text-white/80 hover:bg-white/10">
-											#{tag.slug}
-										</Badge>
-									</Link>
-								))}
-							</div>
-						</div>
-					)}
-
-					{/* Author Bio */}
-					<div className="mt-12">
-						<AuthorBio
-							name={post.author.name}
-							username={post.author.username}
-							profilePicture={post.author.profilePicture}
-						/>
-					</div>
-				</motion.article>
-
-				{/* Sidebar */}
-				{post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 && (
-					<aside className="lg:col-span-4">
-						<TableOfContents items={post.features.tableOfContents.items} />
-					</aside>
-				)}
+				</Container>
 			</div>
-		</Container>
 
-		{/* Image Lightbox Dialog */}
-		<Dialog open={imageDialogOpen} onOpenChange={setImageDialogOpen}>
-			<DialogContent className="max-w-7xl w-full p-0 bg-black/95 border-white/10">
-				{coverImageSrc && (
-					<div className="relative w-full h-[90vh]">
+			{/* Cover Image */}
+			{coverImageSrc && (
+				<Container className="max-w-5xl px-4 sm:px-6 lg:px-8 mb-12">
+					<div 
+						className="relative h-[400px] sm:h-[600px] w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
+						onClick={() => setImageDialogOpen(true)}
+					>
 						<Image
 							src={coverImageSrc}
 							alt={post.title}
 							fill
-							className="object-contain"
+							className="object-cover hover:scale-105 transition-transform duration-700"
+							priority
 						/>
 					</div>
-				)}
-			</DialogContent>
-		</Dialog>
-	</>
+				</Container>
+			)}
+
+			{/* Content Section */}
+			<Container className="max-w-4xl px-4 sm:px-6 lg:px-8 pb-16">
+				<div className={`grid grid-cols-1 gap-12 ${post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:grid-cols-12' : ''}`}>
+					{/* Main Content */}
+					<article className={post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 ? 'lg:col-span-8' : 'mx-auto max-w-4xl'}>
+						<div className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary-dark prose-img:rounded-xl">
+							<MarkdownToHtml contentMarkdown={post.content.markdown} />
+						</div>
+
+						{/* Tags Section */}
+						{(post.tags ?? []).length > 0 && (
+							<div className="mt-12 pt-8 border-t border-border">
+								<h3 className="text-lg font-bold text-foreground mb-4">Posted in</h3>
+								<div className="flex flex-wrap gap-2">
+									{post.tags!.map((tag) => (
+										<Link key={tag.id} href={`/tag/${tag.slug}`}>
+											<Badge variant="outline" className="border-border text-muted-foreground hover:bg-accent hover:text-accent-foreground px-4 py-2 text-sm">
+												#{tag.slug}
+											</Badge>
+										</Link>
+									))}
+								</div>
+							</div>
+						)}
+
+						{/* Author Bio */}
+						<div className="mt-12 p-8 bg-accent-1 rounded-2xl">
+							<AuthorBio
+								name={post.author.name}
+								username={post.author.username}
+								profilePicture={post.author.profilePicture}
+							/>
+						</div>
+					</article>
+
+					{/* Sidebar */}
+					{post.features.tableOfContents.isEnabled && post.features.tableOfContents.items.length > 0 && (
+						<aside className="lg:col-span-4 lg:sticky lg:top-32 h-fit hidden lg:block">
+							<div className="bg-card-bg border border-border rounded-xl p-6">
+								<h3 className="font-bold text-foreground mb-4">Table of Contents</h3>
+								<TableOfContents items={post.features.tableOfContents.items} />
+							</div>
+						</aside>
+					)}
+				</div>
+			</Container>
+
+			{/* Image Lightbox Dialog */}
+			<Dialog open={imageDialogOpen} onOpenChange={setImageDialogOpen}>
+				<DialogContent className="max-w-7xl w-full p-0 bg-transparent border-none shadow-none">
+					{coverImageSrc && (
+						<div className="relative w-full h-[90vh]">
+							<Image
+								src={coverImageSrc}
+								alt={post.title}
+								fill
+								className="object-contain"
+							/>
+						</div>
+					)}
+				</DialogContent>
+			</Dialog>
+		</>
 	);
 };
 
@@ -378,7 +275,12 @@ const Page = ({ page }: PageProps) => {
 			<Head>
 				<title>{title}</title>
 			</Head>
-			<MarkdownToHtml contentMarkdown={page.content.markdown} />
+			<Container className="max-w-4xl mx-auto py-10 px-5">
+				<h1 className="text-4xl font-bold mb-8 text-foreground">{title}</h1>
+				<div className="prose prose-lg prose-slate max-w-none">
+					<MarkdownToHtml contentMarkdown={page.content.markdown} />
+				</div>
+			</Container>
 		</>
 	);
 };
@@ -392,13 +294,7 @@ export default function PostOrPage(props: Props) {
 		<AppProvider publication={publication} post={maybePost} page={maybePage}>
 			<Layout>
 				{props.type === 'post' && <Post {...props} />}
-				{props.type === 'page' && (
-					<Container className="mx-auto flex max-w-3xl flex-col items-stretch gap-10 px-5 py-10">
-						<article className="flex flex-col items-start gap-10 pb-10">
-							<Page {...props} />
-						</article>
-					</Container>
-				)}
+				{props.type === 'page' && <Page {...props} />}
 			</Layout>
 		</AppProvider>
 	);

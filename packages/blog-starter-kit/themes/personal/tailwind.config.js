@@ -7,17 +7,26 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				background: '#121212',
-				'card-dark': 'hsl(222.2 84% 4.9%)',
-				primary: '#FF33CC',
-				'pink-600': '#E60099',
+				background: '#FAFAFA', // Light background
+				foreground: '#0F172A', // Dark text
+				primary: '#0066FF', // Vibrant Blue (Brand)
+				'primary-dark': '#0052CC',
+				secondary: '#FFD700', // Vibrant Yellow
+				tertiary: '#FF3366', // Vibrant Pink/Red
+				'card-bg': '#FFFFFF',
+				'card-border': '#E2E8F0',
+				muted: '#64748B',
+				
+				// Keep some existing colors if needed for compatibility, but remapped
+				'card-dark': '#F8FAFC', 
+				'pink-600': '#FF3366',
 				'pink-200': '#FFC6F0',
-				gold: '#FFD54F',
-				'accent-1': '#FAFAFA',
-				'accent-2': '#EAEAEA',
-				'accent-7': '#333',
-				success: '#0070f3',
-				cyan: '#79FFE1',
+				gold: '#FFD700',
+				'accent-1': '#F1F5F9',
+				'accent-2': '#E2E8F0',
+				'accent-7': '#334155',
+				success: '#10B981',
+				cyan: '#06B6D4',
 			},
 			fontFamily: {
 				sans: ['var(--font-sora)', 'sans-serif'],
