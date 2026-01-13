@@ -7,8 +7,8 @@ import { Container } from '../../components/container';
 import { AppProvider } from '../../components/contexts/appContext';
 import { Footer } from '../../components/footer';
 import { Layout } from '../../components/layout';
-import { MinimalPosts } from '../../components/minimal-posts';
-import { PersonalHeader } from '../../components/personal-theme-header';
+import { SectionHeader } from '../../components/ui/SectionHeader';
+import { MagazineCard } from '../../components/ui/MagazineCard';
 import {
 	PostFragment,
 	PublicationFragment,
@@ -44,14 +44,25 @@ export default function Tag({ publication, posts, tag }: Props) {
 						dangerouslySetInnerHTML={{ __html: JSON.stringify(addPublicationJsonLd(publication)) }}
 					/>
 				</Head>
-				<Container className="mx-auto flex max-w-3xl flex-col items-stretch gap-10 px-5 py-10">
-					<PersonalHeader />
-					<div className="flex flex-col gap-1 pt-5">
-						<p className="font-bold uppercase text-slate-500 dark:text-neutral-400">Tag</p>
-						<h1 className="text-4xl font-bold text-slate-900 dark:text-neutral-50">#{tag}</h1>
+				<Container className="mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+					<div className="pt-10 mb-12">
+						<SectionHeader 
+							title={`#${tag}`} 
+							description="Browse all articles tagged with this topic."
+						/>
 					</div>
-					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
-					<Footer />
+
+					{posts.length > 0 ? (
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+							{posts.map((post) => (
+								<MagazineCard key={post.id} post={post} />
+							))}
+						</div>
+					) : (
+						<div className="py-20 text-center text-muted-foreground">
+							<p>No posts found for this tag.</p>
+						</div>
+					)}
 				</Container>
 			</Layout>
 		</AppProvider>
