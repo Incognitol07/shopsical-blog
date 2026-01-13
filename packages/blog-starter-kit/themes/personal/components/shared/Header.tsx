@@ -102,7 +102,7 @@ export default function Header() {
             </div>
             
             <a href="https://shopsical.com/download" target="_blank" rel="noopener noreferrer">
-              <Button size="sm" className="rounded-full font-semibold px-6 shadow-none hover:shadow-md transition-shadow">
+              <Button size="sm" className="rounded-full font-semibold px-6 shadow-none hover:shadow-md transition-shadow text-white">
                 Get the App
               </Button>
             </a>
