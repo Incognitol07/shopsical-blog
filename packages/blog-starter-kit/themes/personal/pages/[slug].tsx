@@ -165,35 +165,21 @@ const Post = ({ publication, post }: PostProps) => {
 								/>
 							</div>
 						)}
-						{/* Author and Meta */}
-						<div className="flex items-center gap-6 py-6 border-y border-border">
-							<div className="flex items-center gap-3">
-								<Avatar className="h-12 w-12 border border-border">
-									<AvatarImage src={post.author.profilePicture || ''} alt={post.author.name} />
-									<AvatarFallback className="bg-primary/10 text-primary font-bold">
-										{post.author.name.charAt(0)}
-									</AvatarFallback>
-								</Avatar>
-								<div>
-									<div className="text-foreground font-bold">{post.author.name}</div>
-									<div className="text-muted-foreground text-sm">@{post.author.username}</div>
-								</div>
-							</div>
-
-							<div className="h-8 w-px bg-border hidden sm:block"></div>
-
-							<div className="flex items-center gap-6 text-muted-foreground text-sm font-medium">
+						{/* Meta and Share */}
+						<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 py-6 border-y border-border">
+							<div className="flex items-center gap-4 text-muted-foreground text-sm font-medium tracking-wide">
 								<div className="flex items-center gap-2">
 									<Calendar className="w-4 h-4 text-primary" />
 									<DateFormatter dateString={post.publishedAt} />
 								</div>
+								<div className="h-1 w-1 rounded-full bg-slate-300" />
 								<div className="flex items-center gap-2">
 									<Clock className="w-4 h-4 text-primary" />
 									<span>{post.readTimeInMinutes} min read</span>
 								</div>
 							</div>
 
-							<div className="ml-auto w-full sm:w-auto mt-4 sm:mt-0">
+							<div className="w-full sm:w-auto">
 								<ShareButtons url={post.url} title={post.title} />
 							</div>
 						</div>
