@@ -1,4 +1,5 @@
 import sanitizeHtml from 'sanitize-html';
+// @ts-ignore
 import slug from 'slug';
 
 export class HeadingSlugger {
