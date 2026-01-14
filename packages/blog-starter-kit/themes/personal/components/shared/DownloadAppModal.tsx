@@ -41,6 +41,7 @@ export function DownloadAppModal({ children, open, onOpenChange }: DownloadAppMo
                 width={160}
                 height={48}
                 className="object-contain h-12 w-auto"
+                priority
               />
             </a>
             <a
@@ -55,6 +56,7 @@ export function DownloadAppModal({ children, open, onOpenChange }: DownloadAppMo
                 width={160}
                 height={48}
                 className="object-contain h-12 w-auto"
+                priority
               />
             </a>
           </div>

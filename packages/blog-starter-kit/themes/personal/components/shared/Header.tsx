@@ -82,6 +82,7 @@ export default function Header() {
                   alt="Shopsical Logo"
                   fill
                   className="object-contain"
+                  priority
                 />
               </div>
               <div className="relative w-24 h-6 sm:w-32 sm:h-8 hidden sm:block">
@@ -90,6 +91,7 @@ export default function Header() {
                   alt="Shopsical"
                   fill
                   className="object-contain"
+                  priority
                 />
               </div>
           </Link>

@@ -37,6 +37,7 @@ export default function Footer() {
                     alt="Shopsical Logo"
                     fill
                     className="object-contain"
+                    priority
                   />
                 </div>
                 <div className="relative w-28 h-7">
@@ -45,6 +46,7 @@ export default function Footer() {
                     alt="Shopsical"
                     fill
                     className="object-contain"
+                    priority
                   />
                 </div>
             </Link>
@@ -105,6 +107,7 @@ export default function Footer() {
                   width={140}
                   height={42}
                   className="object-contain"
+                  priority
                 />
               </a>
               <a
@@ -120,6 +123,7 @@ export default function Footer() {
                   height={42}
                   className="object-contain" // Fixed width for alignment
                   style={{ width: 140 }} 
+                  priority
                 />
               </a>
             </div>
