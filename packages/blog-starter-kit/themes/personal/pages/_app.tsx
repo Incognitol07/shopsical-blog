@@ -13,6 +13,9 @@ const poppins = Poppins({
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	useEffect(() => {
+		// Apply fonts to body to ensure Portals (Dialogs, Dropdowns) capture the variables
+		document.body.classList.add(sora.variable, poppins.variable, 'font-sans');
+
 		(window as any).adjustIframeSize = (id: string, newHeight: string) => {
 			const i = document.getElementById(id);
 			if (!i) return;
@@ -22,7 +25,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 	}, []);
 	return (
 		<ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light">
-			<main className={`${sora.variable} ${poppins.variable} font-sans`}>
+			<main>
 				<Component {...pageProps} />
 			</main>
 		</ThemeProvider>
