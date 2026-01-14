@@ -119,23 +119,6 @@ const Post = ({ publication, post }: PostProps) => {
 				<style dangerouslySetInnerHTML={{ __html: highlightJsMonokaiTheme }}></style>
 			</Head>
 
-			{/* Cover Image */}
-			{coverImageSrc && (
-				<Container className="max-w-5xl px-4 sm:px-6 lg:px-8 mb-12">
-					<div 
-						className="relative h-[250px] sm:h-[600px] w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
-						onClick={() => setImageDialogOpen(true)}
-					>
-						<Image
-							src={coverImageSrc}
-							alt={post.title}
-							fill
-							className="object-cover hover:scale-105 transition-transform duration-700"
-							priority
-						/>
-					</div>
-				</Container>
-			)}
 
 
 			{/* Article Header */}
@@ -167,6 +150,23 @@ const Post = ({ publication, post }: PostProps) => {
 							</p>
 						)}
 
+						{/* Cover Image */}
+						{coverImageSrc && (
+							<Container className="max-w-5xl px-4 sm:px-6 lg:px-8 mb-12">
+								<div 
+									className="relative h-[250px] sm:h-[600px] w-full cursor-pointer overflow-hidden rounded-2xl shadow-lg"
+									onClick={() => setImageDialogOpen(true)}
+								>
+									<Image
+										src={coverImageSrc}
+										alt={post.title}
+										fill
+										className="object-cover hover:scale-105 transition-transform duration-700"
+										priority
+									/>
+								</div>
+							</Container>
+						)}
 						{/* Author and Meta */}
 						<div className="flex items-center gap-6 py-6 border-y border-border">
 							<div className="flex items-center gap-3">
