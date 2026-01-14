@@ -56,6 +56,10 @@
 	padding: 0 2px;
 }
 
+.hashnode-content-style mark strong {
+	color: inherit;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
 	width: 8px;
