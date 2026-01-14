@@ -44,7 +44,14 @@
 }
 
 .hashnode-content-style {
-	@apply prose break-words text-foreground prose-headings:font-heading prose-headings:font-bold prose-headings:text-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:bg-primary/10 hover:prose-a:text-primary prose-strong:text-foreground prose-code:text-primary prose-code:bg-slate-100 prose-code:rounded-md prose-code:px-1 prose-mark:bg-[#fff4e6] prose-mark:text-[#8f312f] prose-blockquote:border-l-primary prose-blockquote:text-muted prose-blockquote:bg-slate-50 prose-blockquote:py-1 prose-blockquote:px-4;
+	@apply prose break-words text-foreground prose-headings:font-heading prose-headings:font-bold prose-headings:text-foreground prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:bg-primary/10 hover:prose-a:text-primary prose-strong:text-foreground prose-code:text-primary prose-code:bg-slate-100 prose-code:rounded-md prose-code:px-1 prose-blockquote:border-l-primary prose-blockquote:text-muted prose-blockquote:bg-slate-50 prose-blockquote:py-1 prose-blockquote:px-4;
+}
+
+.hashnode-content-style mark {
+	background-color: #fff4e6;
+	color: #8f312f;
+	border-radius: 2px;
+	padding: 0 2px;
 }
 
 /* Custom Scrollbar */
