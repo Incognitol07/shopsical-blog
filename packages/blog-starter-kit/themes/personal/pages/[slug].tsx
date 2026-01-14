@@ -12,7 +12,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Clock, Calendar } from 'lucide-react';
+import { Clock, Calendar, ChevronLeft } from 'lucide-react';
 import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { DateFormatter } from '../components/date-formatter';
@@ -125,6 +125,19 @@ const Post = ({ publication, post }: PostProps) => {
 			<div className="pt-6 sm:pt-10 pb-8 px-4 sm:px-6 lg:px-8 bg-background">
 				<Container className="max-w-4xl">
 					<div className="space-y-6">
+						{/* Back Link */}
+						<div className="mb-8">
+							<Link 
+								href="/" 
+								className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors group"
+							>
+								<div className="p-1 rounded-full bg-slate-100 group-hover:bg-primary/10 transition-colors">
+									<ChevronLeft className="w-4 h-4" />
+								</div>
+								Back to Articles
+							</Link>
+						</div>
+
 						{/* Tags */}
 						{post.tags && post.tags.length > 0 && (
 							<div className="flex gap-2 flex-wrap">
