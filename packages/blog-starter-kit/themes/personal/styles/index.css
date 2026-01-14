@@ -48,8 +48,10 @@
 }
 
 .hashnode-content-style mark {
-	background-color: #fff4e6;
-	color: #8f312f;
+	background-color: #E0F2FE;
+	/* Light Blue (Primary Tint) */
+	color: #0066FF;
+	/* Primary Blue */
 	border-radius: 2px;
 	padding: 0 2px;
 }
