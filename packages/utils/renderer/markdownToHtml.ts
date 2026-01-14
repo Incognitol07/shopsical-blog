@@ -1,5 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 import sanitizeHtmlOptions from './sanitizeHTMLOptions';
+import { HeadingSlugger } from './headingSlugger';
 
 const marked = require('./marked');
 const renderer = new marked.Renderer();
@@ -80,7 +81,14 @@ const getSanitizedHTML = (content: string) => {
 	return sanitizeHtml(content, sanitizeHtmlOptions);
 };
 
+
 const getHTMLFromMarkdown = (contentMarkdown: string) => {
+	const slugger = new HeadingSlugger();
+	// @ts-ignore
+	renderer.heading = (text, level, raw) => {
+		const slug = slugger.getSlug(raw);
+		return `<h${level} id="${slug}">${text}</h${level}>`;
+	};
 	return marked(contentMarkdown, markedOpts);
 };
 
@@ -90,8 +98,8 @@ const getOptimizedImages = (content: string) => {
 
 const pipe =
 	(...fns: any[]) =>
-	(x: any) =>
-		fns.reduce((v, f) => f(v), x);
+		(x: any) =>
+			fns.reduce((v, f) => f(v), x);
 
 export const markdownToHtml = (contentMarkdown: string) => {
 	const content = pipe(
